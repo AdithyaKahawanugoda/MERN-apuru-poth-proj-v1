@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+ 
 
 export default class address extends Component {
   constructor(props) {
@@ -46,14 +48,16 @@ export default class address extends Component {
     return (
       <div>
         <br/><br/>
-        <h3>Do you need to change your address?</h3><br/>
-         
+                
+        <h4 class ="text-dark">Do you need to change your address?</h4><br/>
+  
         <form onSubmit={this.onSubmit}>
-          <div className="form-group"> 
-            <label>Address: </label>
+          <div className="form-group" class ="text-dark">  
+            <label>Address: </label><br/>
             <textarea 
                 required
-                className="form-control"
+               className="form-control"
+               class="col-sm-7"
                 value={this.state.address}
                 onChange={this.onChangeAddress}
                 rows = "10"
@@ -62,14 +66,37 @@ export default class address extends Component {
           </div>
           <br/><br/>
           <div className="form-group">
-            <input type="submit" value="Change" className="btn btn-primary"  />
-          </div>
-          
-          <div className="form-group">
-            <br/>
-            <center><Link to= "/paymentMethod" exact ><input type="submit" value="Next" className="btn btn-primary" /></Link></center>
+          <Button className="ui button" onClick={this.onChangeAddress} style={{width:242, backgroundColor: "#ff8c00" }}  >
+             Change
+            </Button>
           </div>
         </form>
+      <br/>
+      <div>
+      <h4 class ="text-dark" >Payment Method</h4><br/></div>   
+      <label class ="text-dark">
+         
+         <input type="radio"  
+                value="  Cash on delivery"
+                onChange = {this.onChange}/>
+          &nbsp;
+      Cash on delivery   
+     </label> 
+     <br/>
+       
+       <label class ="text-dark">
+       <input type="radio"
+                  value=" unavailable"
+                  onChange = {this.onChange}
+                  disabled     />
+       &nbsp; <i> Unavailable</i>
+       </label>
+       <div className="form-group">
+            <br/>
+            <center><Button className="ui button" style={{width:242, backgroundColor: "#ff8c00" }}  >
+             Next
+            </Button> </center>
+          </div>
 
       </div>
     )

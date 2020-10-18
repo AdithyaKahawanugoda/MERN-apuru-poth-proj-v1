@@ -1,50 +1,52 @@
 const mongoose = require("mongoose");
-//const validator = require("validator");
+const validator = require("validator");
 
 const orderSchema = new mongoose.Schema({
 
-    orderID:{
+    CustomerID:{
 
-          type: String,
-          required: true,
-          trim: true,
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "users",
 
     },
 
-    // ITem:{
+    Item: [{
 
-    //       product:{
+                   productID:{
 
-    //                productID:{
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref:"products"
+                   },
 
-    //                 type: String,
-    //                 required: true,
-    //                 trim: true,
-    //                },
-
-    //                quantity:{
+                   quantity:{
                        
-    //                  type: String,
-    //                  required: true,
-    //                  trim: true,
+                     type: Number,
+             //        required: true,
+                     trim: true,
 
-    //                }
-    // }
+                   }
+    }],
+
+    // paymentType:{
+
+    //   type: String,
+    //   trim: true,
 
     // },
 
-    discount:{
 
-        type: Number,
-        required: true,
-        trim: true,  
+    percentage:{
+
+        type: String,
+        ref:"discounts",
+          
            
     },
 
     checkoutAmount:{
           
         type: Number,
-        required: true,
+        //required: true,
         trim: true,  
 
     },
@@ -52,11 +54,13 @@ const orderSchema = new mongoose.Schema({
     deliveryAddress:{
 
         type: String,
-        //required: true,
+       // required: true,
         trim: true,  
-    }
+    },
+
+     
 });
 
-const order = mongoose.model("order", orderSchema);
+const order = mongoose.model("orders", orderSchema);
 
 module.exports = order;

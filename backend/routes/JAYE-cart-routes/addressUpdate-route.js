@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Address = require("../models/");
+//const auth = require('../../middleware/auth');
+const Address = require('../../HSKI-User/user.model');
 
 // @url           /customer/update/address/:id
 // @description   update quantity
