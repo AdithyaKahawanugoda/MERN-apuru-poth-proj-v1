@@ -28,11 +28,9 @@ const Book = ({ bookId, bookTitle, bookPrice, averageRating, bookImage, translat
 
    const addToCart = async () => {
       const cartItem = {
-        productId: bookId,
-        price: bookPrice,
-        quantity: 1,
-        totalPrice: 1 * bookPrice,
-        itemImage: bookImage
+         productId: bookId,
+         price: bookPrice,
+         quantity: 1
       }
       const config = {
          headers: {
