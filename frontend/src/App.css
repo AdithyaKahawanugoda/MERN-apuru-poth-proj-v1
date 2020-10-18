@@ -1,0 +1,115 @@
+body {
+  overflow-x: hidden;
+}
+
+.background {
+  background-color: #ff8c00;
+  height: 370px;
+}
+
+.bg-register-image {
+  background: url("https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Fregister.jpg?alt=media&token=8f3caaec-3e61-4451-861d-00760e225a12");
+}
+
+.bg-admin-register {
+  background: url("https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Fadmin_register.jpg?alt=media&token=878dd0d6-6e58-4a16-b71e-f0e89d734fa7");
+}
+
+.bg-request-book {
+  background: url("https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Frequest_book.jpg?alt=media&token=b3ec89bf-65b9-4fec-a4c3-d9a45a024ea2");
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*Project Stypes*/
+.disp {
+  display: inline-block;
+}
+
+button:focus {
+  outline: none;
+}
+
+.product-col {
+  height: fit-content;
+}
+
+.product-card {
+  background-color: #fcfcfb;
+}
+
+textarea {
+  overflow: auto;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0.25);
+}
+
+.custom-hr {
+  border: none;
+  border-left: 1px solid hsla(200, 10%, 50%, 100);
+  height: 100px;
+  width: 1px;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}

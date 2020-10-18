@@ -1,0 +1,287 @@
+body {
+  font-family: Roboto, SF Pro Display, FMMalithi;
+  /* background-color: #fafafa; */
+}
+
+.background {
+  background-color: #e96827;
+  height: 370px;
+}
+
+button:focus {
+  outline: none;
+}
+
+.product-col {
+  height: fit-content;
+}
+
+.product-card {
+  background-color: #fcfcfb;
+}
+
+textarea {
+  overflow: auto;
+}
+
+@media (min-width: 300px) {
+  .background {
+    background-color: #ff8c00;
+    height: 480px;
+  }
+  .image {
+    padding-left: 15px;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 250px;
+    height: 340px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+  }
+  .avg-rating {
+    font-size: 100px;
+    font-weight: bold;
+    padding-left: 60px;
+  }
+  .stars {
+    padding-left: 28px;
+  }
+  .rating-bar {
+    padding-left: 0px;
+  }
+  .all-rating-bars {
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 350px) {
+  .background {
+    background-color: #e96827;
+    height: 400px;
+  }
+  .image {
+    padding-left: 40px;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 250px;
+    height: 340px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+  }
+  .avg-rating {
+    padding-left: 80px;
+  }
+  .rating-bar {
+    padding-left: 0px;
+  }
+  .all-rating-bars {
+    padding-left: 10px;
+  }
+  .rating-container {
+    width: 800px;
+  }
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 400px) {
+  .background {
+    background-color: #e96827;
+    height: 390px;
+  }
+  .image {
+    padding-left: 35px;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 300px;
+    height: 400px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+  }
+  .avg-rating {
+    padding-left: 100px;
+  }
+  .rating-bar {
+    padding-left: 0px;
+  }
+  .all-rating-bars {
+    padding-left: 10px;
+  }
+  .rating-container {
+    width: 800px;
+  }
+}
+
+@media (min-width: 500px) {
+  .background {
+    background-color: #e96827;
+    height: 370px;
+  }
+  .image {
+    padding-left: 90px;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 300px;
+    height: 400px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+  }
+  .avg-rating {
+    padding-left: 55px;
+  }
+  .stars {
+    padding-left: 28px;
+  }
+  .rating-bar {
+    padding-left: 0px;
+  }
+  .all-rating-bars {
+    padding-left: 50px;
+  }
+  .rating-container {
+    width: 800px;
+  }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .background {
+    background-color: #e96827;
+    height: 370px;
+  }
+  .image {
+    padding-left: 180px;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 300px;
+    height: 400px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+    width: 685px;
+  }
+  .avg-rating {
+    padding-left: 0px;
+    font-size: 90px;
+    font-weight: bold;
+  }
+  .stars {
+    padding-left: 8px;
+  }
+  .rating-bar {
+    padding-left: 0px;
+  }
+  .all-rating-bars {
+    padding-left: 50px;
+  }
+  .rating-container {
+    width: 800px;
+  }
+}
+
+/*desktops, 900px and up)*/
+@media (min-width: 900px) {
+  .background {
+    background-color: #e96827;
+    height: 370px;
+  }
+  .image {
+    padding-left: 110px;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 450px;
+    height: 595px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+    width: 688px;
+  }
+  .avg-rating {
+    padding-left: 5px;
+  }
+  .stars {
+    padding-left: 8px;
+  }
+  .rating-bar {
+    padding-left: 0px;
+  }
+  .all-rating-bars {
+    padding-left: 50px;
+    width: 150px;
+  }
+  .rating-container {
+    width: 200px;
+  }
+}
+
+/*(desktops, 1000px and up)*/
+@media (min-width: 1000px) {
+  .background {
+    background-color: #e96827;
+    height: 370px;
+  }
+  .image {
+    padding-left: 0px;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 300px;
+    height: 400px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+    width: 610px;
+  }
+  .avg-rating {
+    padding-left: 0px;
+  }
+  .stars {
+    padding-left: 8px;
+  }
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+  .background {
+    background-color: #e96827;
+    height: 370px;
+  }
+  .image {
+    padding-left: 0;
+    padding-top: 15px;
+  }
+  .image-size {
+    width: 300px;
+    height: 400px;
+  }
+  .card-css {
+    background-color: #fcfcfb;
+    width: 750px;
+  }
+  .avg-rating {
+    padding-left: 0px;
+    padding-left: 15px;
+    font-size: 110px;
+  }
+  .stars {
+    padding-left: 8px;
+  }
+  .rating-bar {
+    padding-left: 0px;
+  }
+  .all-rating-bars {
+    padding-left: 20px;
+  }
+  .rating-container {
+    width: 800px;
+  }
+}
