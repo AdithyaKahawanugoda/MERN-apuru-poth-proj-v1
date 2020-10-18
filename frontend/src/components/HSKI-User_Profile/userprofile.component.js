@@ -10,6 +10,7 @@ import Cart from '../JAYE-cart/cart.display.component';
 import Exit from '@material-ui/icons/ExitToApp'
 import Wishlist from '../HSKI-User_Profile/wishlist.component';
 import Favslist from '../HSKI-User_Profile/favslist.component';
+import DisplayRequests from '../NITH-RequestBook/DisplayRequestBook-User'
 
 const Profile = () => {
    const [userId, setUserId] = useState(null)
@@ -120,9 +121,7 @@ const Profile = () => {
                </div>
             </div>
             <hr />
-            <Cart />
-            <Wishlist/>
-            <Favslist/>
+            <DisplayRequests />
          </div>
       </div>
    )

@@ -48,6 +48,15 @@ router.get("/all", async (req, res) => {
   }
 });
 
+router.get('/myrequests', auth, async (req, res) => {
+  try {
+    const userRequest = await Request.find({userID: req.user.id})
+    res.status(200).send({requests: userRequest})
+  } catch (error) {
+    res.status(500).send({ status: "Error with /myrequests", error: error.message });
+  }
+})
+
 // @url           /request/update/:id
 // @description   update request by id
 // @Action        private
