@@ -11,6 +11,7 @@ const DisplayBooks = () => {
    const [books, setBooks] = useState([])
    const [currentPage, setCurrentPage] = useState(1)
    const [postPerPage] = useState(12)
+   const [advertisement, setAdvertisement] = useState([])
 
    useEffect(() => {
       setLoading(true)
@@ -24,6 +25,13 @@ const DisplayBooks = () => {
                .catch((error) => {
                   console.log(error.message)
                })
+            await axios.get('http://localhost:8059/advertisement/all')
+            .then((res) => {
+              setAdvertisement(res.data.advertisement)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
          } catch (error) {
             console.log(error.message)
          }
@@ -46,36 +54,69 @@ const DisplayBooks = () => {
    }
 
    return (
-      <div style={{ backgroundImage: 'url(https://picsum.photos/id/1073/5472/3648.jpg/?blur=10)', height: "100%" }}>
-         <div className="container">
-            <div className="row" style={{ paddingTop: 15 }}>
-               {currentPost.map((book) => (
-                  <div key={book._id} className="col-lg-3 col-md-6">
-                    <div className="ui link cards">
-                      <Book
-                          key={book._id}
-                          bookId={book._id}
-                          bookTitle={book.publishingTitle}
-                          bookPrice={book.marketPrice}
-                          averageRating={book.averageRating}
-                          bookImage={book.bookImage}
-                          translator={book.translator}
-                      />
-                      {console.log(book.weight)}
-                     </div>
+    <div style={{ backgroundImage: 'url(https://picsum.photos/id/1073/5472/3648.jpg/?blur=10)', height: "100%" }}>
+      <div className="container">
+        <div className="row">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner pt-3 pl-3 pr-3" style={{height: 480}}>
+              {console.log(advertisement.length)}
+              {advertisement.length > 0 ? 
+                <div class="carousel-item active">
+                  <img class="d-block w-100" src={advertisement[0].image} alt="First slide"/>
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{advertisement[0].title}</h5>
+                    <p>go to the product</p>
                   </div>
-               ))}
+                </div>
+              : <span>None</span>}
+              {advertisement.map((item) => (
+                <div class="carousel-item">
+                  <img class="d-block w-100" src={item.image} alt="Slide"/>
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Checkout Now</h5>
+                    <p>go to the product</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <br />
-            <div className="d-flex justify-content-center customPagination">
-               <Paginat
-                  postPerPage={postPerPage}
-                  totalPosts={books.length}
-                  paginate={paginate}
-               />
-            </div>
-         </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        <div className="row" style={{ paddingTop: 15 }}>
+          {currentPost.map((book) => (
+          <div key={book._id} className="col-lg-3 col-md-6">
+            <div className="ui link cards">
+              <Book
+                key={book._id}
+                bookId={book._id}
+                bookTitle={book.publishingTitle}
+                bookPrice={book.marketPrice}
+                averageRating={book.averageRating}
+                bookImage={book.bookImage}
+                translator={book.translator}
+              />
+              {console.log(book.weight)}
+              </div>
+          </div>
+          ))}
+        </div>
+        <br />
+        <div className="d-flex justify-content-center customPagination">
+          <Paginat
+            postPerPage={postPerPage}
+            totalPosts={books.length}
+            paginate={paginate}
+          />
+        </div>
       </div>
+  </div>
    )
 }
 

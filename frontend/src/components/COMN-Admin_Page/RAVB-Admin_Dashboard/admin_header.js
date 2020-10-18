@@ -6,6 +6,7 @@ import AdminProfile from "../LIHI-Admin/AdminProfile"
 import DeliveryPage from '../YASA-Admin/DeliveryPage'
 import Discount from '../LIHI-Admin/DiscountPage'
 import SendEmail from '../../YASA-Delivery_Page/emaildelivery.component'
+import AdvertisementPage from '../BINU-Advertisement/AdvertisementPage'
 import {Link} from 'react-router-dom'
 import './style.css'
 
@@ -63,7 +64,7 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <Link to="#" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
+              <Link to="/admin/advertisement" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   cast
                 </i>
@@ -92,7 +93,8 @@ const AdminHeader = () => {
                   <Route exact path="/admin/profile" component={AdminProfile}/>
                   <Route exact path="/admin/delivery" component={DeliveryPage}/>  
                   <Route exact path="/admin/discount" component={Discount}/>     
-                  <Route exact path="/admin/sendemail" component={SendEmail}/>       
+                  <Route exact path="/admin/sendemail" component={SendEmail}/>   
+                  <Route exact path="/admin/advertisement" component={AdvertisementPage} />    
                 </Switch>
               </section>
             </Fragment>

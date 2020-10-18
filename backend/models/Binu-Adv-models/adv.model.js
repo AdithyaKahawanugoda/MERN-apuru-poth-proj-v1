@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const advSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -14,14 +13,14 @@ const advSchema = new mongoose.Schema({
     trim: true,
   },
 
-  text: {
+  description: {
     type: String,
     required: true,
     trim: true,
   },
 
   image: {
-    type:Buffer,
+    type:String,
     required: true,
   },
   

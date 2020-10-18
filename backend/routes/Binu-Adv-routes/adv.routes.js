@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Advertisement = require("../../models/Binu-Adv-models/adv.model");
-//image
 const multer = require('multer');
 const sharp =require('sharp');
 
@@ -20,37 +19,25 @@ const image = multer({
 
 });
 
-
-// @url           /admin/advertisement/add
-// @description   create new advertisement
-// @Action        public
-router.post("/add",image.single("pic"), async (req, res) => {
-  try {
-    const picture =await sharp(req.file.buffer)
-    .resize({width :300 ,height :300})
-    .png()
-    .toBuffer();
-    
-    const { title, pdate, text} = req.body;
+router.post("/add", async (req, res) => {
+  try {    
+    const { title, pdate, text, imageUrl} = req.body;
     const dbAdv = {
       title: title,
       publisheddate: pdate,
-      text: text,
-      image:picture,
+      description: text,
+      image:imageUrl,
     };
 
     const newAdv = new Advertisement(dbAdv);
     await newAdv.save();
-    res.status(200).send({ status: "Advertisement  Created", advertisement: newAdv });
+    res.status(200).send({ status: "Advertisement Created", advertisement: newAdv });
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ error: error.message });
   }
 });
 
-// @url           admin/advertisement/all
-// @description   return all advertisements in database
-// @Action        public
 router.get("/all", async (req, res) => {
   try {
     const adv = await Advertisement.find({});
