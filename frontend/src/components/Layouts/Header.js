@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PersonIcon from '@material-ui/icons/Person';
+
 
 export default class Header extends Component {
 
@@ -11,8 +14,8 @@ export default class Header extends Component {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
@@ -22,10 +25,24 @@ export default class Header extends Component {
             <a class="nav-link" href="#">Pricing</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <a class="nav-link" href="#">Disabled</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Request Book</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i><ShoppingCartIcon/></i>
+              <span class="text ml-1">Cart</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i><PersonIcon /></i>
+              <span class="text ml-1">My Account</span>
+            </a>
           </li>
         </ul>
       </div>

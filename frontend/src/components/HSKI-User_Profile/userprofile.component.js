@@ -64,37 +64,37 @@ const Profile = () => {
       <div>
          <div className="container">
             <div className="row pt-5">
-               <div className="col-2">
+               <div className="col-lg-2 col-sm-12">
                   <Image src={picture} roundedCircle style={{ width: 220 }} />
                </div>
-               <div className="col-10">
+               <div className="col-lg-10 col-sm-12">
                   <div style={{ paddingLeft: 90 }}>
-                     <Typography variant="h3" className="text-color">{name}</Typography>
+                     <h1 variant="h3" className="text-color">{name}</h1>
 
                      <div className="row" style={{ paddingLeft: 15 }}>
                         <label>
-                           <Typography variant="h5" className="text-color" >Email: {email}</Typography>
+                           <h5 variant="h5" className="text-color" >Email: {email}</h5>
                         </label>
                         <label style={{ paddingLeft: 15 }}>
-                           <Typography variant="h5" className="text-color">Phone Number: +94 {phoneNumber}</Typography>
+                           <h5 variant="h5" className="text-color">Phone Number: +94 {phoneNumber}</h5>
                         </label>
                      </div>
-                     <Typography variant="h5" className="text-color">Shipping Address</Typography>
+                     <h3 variant="h5" className="text-color">Shipping Address</h3>
                      <div className="row" style={{ paddingLeft: 15 }}>
                         <label>
-                           <Typography variant="h6" className="text-color">No.{postalCode},</Typography>
+                           <h5 variant="h6" className="text-color">No.{postalCode},</h5>
                         </label>
                         <label>
-                           <Typography variant="h6" style={{ paddingLeft: 5 }} className="text-color">{address1},</Typography>
+                           <h5 variant="h6" style={{ paddingLeft: 5 }} className="text-color">{address1},</h5>
                         </label>
                         <label>
-                           <Typography variant="h6" style={{ paddingLeft: 5 }} className="text-color">{address2},</Typography>
+                           <h5 variant="h6" style={{ paddingLeft: 5 }} className="text-color">{address2},</h5>
                         </label>
                         <label>
-                           <Typography variant="h6" style={{ paddingLeft: 5 }} className="text-color">{city},</Typography>
+                           <h5 variant="h6" style={{ paddingLeft: 5 }} className="text-color">{city},</h5>
                         </label>
                         <label>
-                           <Typography variant="h6" style={{ paddingLeft: 5 }} className="text-color">{country}</Typography>
+                           <h5 variant="h6" style={{ paddingLeft: 5 }} className="text-color">{country}</h5>
                         </label>
                      </div>
                      <div className="row" style={{ paddingLeft: 15 }}>
