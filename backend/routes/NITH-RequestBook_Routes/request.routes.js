@@ -48,19 +48,30 @@ router.get("/all", async (req, res) => {
   }
 });
 
+router.get('/myrequests', auth, async (req, res) => {
+  try {
+    const userRequest = await Request.find({userID: req.user.id})
+    res.status(200).send({requests: userRequest})
+  } catch (error) {
+    res.status(500).send({ status: "Error with /myrequests", error: error.message });
+  }
+})
+
 // @url           /request/update/:id
 // @description   update request by id
 // @Action        private
-router.post("/update/:id", async (req, res) => {
+router.post("/update/:id", auth, async (req, res) => {
   const Id = req.params.id;
   try {
-    const { bookname, authorname, printedyear, userid, email } = req.body;
+    const { bookname, authorname, printedyear } = req.body;
     const updateValues = {
         bookName: bookname,
         authorName: authorname,
         printedYear: printedyear,
-        userId: userid,
-        userEmail: email,
+        userID: req.user.id,
+        userName: req.user.name,
+        profileImage: req.user.profilePicture,
+        userEmail: req.user.email,
     };
     const updateRequest = await Request.findByIdAndUpdate(Id, updateValues);
     res.status(200).send({ status: "Request updated", request: updateRequest });
@@ -72,7 +83,7 @@ router.post("/update/:id", async (req, res) => {
 // @url           /request/delete/:id
 // @description   delete request by id
 // @Action        private
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", auth, async (req, res) => {
   const reqID = req.params.id;
   try {
     const deleteRequest = await Request.findByIdAndDelete(reqID);

@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PersonIcon from '@material-ui/icons/Person';
-
+import {Link} from 'react-router-dom'
+import CreateRequestBook from '../NITH-RequestBook/create-requestbook.component'
 
 export default class Header extends Component {
 
@@ -28,7 +29,7 @@ export default class Header extends Component {
             <a class="nav-link" href="#">Disabled</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Request Book</a>
+            <Link to="/requestbook" class="nav-link">Request Book</Link>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -39,10 +40,10 @@ export default class Header extends Component {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link to="/me" class="nav-link">
               <i><PersonIcon /></i>
               <span class="text ml-1">My Account</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

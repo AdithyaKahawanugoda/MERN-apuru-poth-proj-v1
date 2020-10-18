@@ -8,7 +8,7 @@ const Product = require('../../models/ADI-Product_and_Invoice/product-model')
 // @description   add products to the cart
 router.post("/add", auth, async (req, res) => {
   try {
-    const { productId, price, quantity } = req.body;
+    const { productId, price, quantity, totalPrice, itemImage } = req.body;
     const user = await User.findById(req.user._id)
     const product = await Product.findById(productId)
     if (!user) {
@@ -22,7 +22,9 @@ router.post("/add", auth, async (req, res) => {
       productId: productId,
       productName: product.publishingTitle,
       productPrice: price,
-      quantity: quantity
+      quantity: quantity,
+      totalPrice: totalPrice,
+      itemImage: itemImage
     };
 
     await User.findOneAndUpdate(

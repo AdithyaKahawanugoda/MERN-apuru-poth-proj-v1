@@ -30,13 +30,9 @@ const Requestbook = (props) => (
 );
 
 export default class RequestbookList extends Component {
-
- 
   constructor(props) {
     super(props);
-
     this.deleteRequestbook = this.deleteRequestbook.bind(this)
-
     this.state = {requestbook: []};
   }
 
