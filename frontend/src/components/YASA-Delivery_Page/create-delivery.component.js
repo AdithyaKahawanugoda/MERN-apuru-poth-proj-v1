@@ -32,6 +32,7 @@ export default class CreateDelivery extends Component {
     axios
       .get("http://localhost:8059/order/")
       .then((response) => {
+        console.log(response.data)
         if (response.data.length > 0) {
           this.setState({
             orders: response.data.map((order) => order._id),
