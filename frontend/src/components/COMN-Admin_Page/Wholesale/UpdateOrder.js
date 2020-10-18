@@ -106,6 +106,7 @@ const UpdateOrder = ({ show, onHide, orderID }) => {
                   type="number"
                   className="form-control form-control-user"
                   placeholder="Total Amount"
+                  min="0"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   required

@@ -309,7 +309,7 @@ router.post("/report", (req, res, next) => {
 });
 //GET req to preview report
 router.get("/getreport", (req, res, next) => {
-  res.sendFile(`${__dirname}/ProductReport.pdf`);
+  res.download(`${__dirname}/ProductReport.pdf`);
 });
 
 module.exports = router;

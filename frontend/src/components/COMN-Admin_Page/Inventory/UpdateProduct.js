@@ -151,6 +151,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
       other: other,
     };
 
+    alert(updatedProdCosts.other + " " + updatedProdCosts.licenseCost);
+
     await axios
       .all([
         axios.post(
@@ -245,6 +247,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="ISBN"
+                  pattern="((?:[\dX]{13})|(?:[\d\-X]{17})|(?:[\dX]{10})|(?:[\d\-X]{13}))"
+                  title="Please enter valid ISBN code"
                   value={ISBN}
                   onChange={(e) => {
                     setISBN(e.target.value);
@@ -258,6 +262,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="License"
+                  pattern="^(?:Yes|No|yes|no|YES|NO)$"
+                  title="You can only enter Yes or No"
                   value={license}
                   onChange={(e) => {
                     setLicense(e.target.value);
@@ -272,6 +278,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   className="form-control form-control-user"
                   placeholder="Quantity"
                   value={quantity}
+                  min="0"
+                  title="Please enter positive integer value"
                   onChange={(e) => {
                     setQuantity(e.target.value);
                   }}
@@ -287,6 +295,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   className="form-control form-control-user"
                   placeholder="Edition"
                   value={edition}
+                  min="1"
+                  title="Please enter positive integer value"
                   onChange={(e) => {
                     setEdition(e.target.value);
                   }}
@@ -300,6 +310,7 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   className="form-control form-control-user"
                   placeholder="Translator Number"
                   value={translatorContact}
+                  pattern="[0-9]{10}"
                   onChange={(e) => {
                     setTranslatorContact(e.target.value);
                   }}
@@ -327,6 +338,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Proof Reader"
+                  pattern="^[a-zA-Z\s]*$"
+                  title="Valid only words"
                   value={proofReader}
                   onChange={(e) => {
                     setProofReader(e.target.value);
@@ -340,6 +353,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Cover Designer"
+                  pattern="^[a-zA-Z\s]*$"
+                  title="Valid only words"
                   value={coverDesigner}
                   onChange={(e) => {
                     setCoverDesigner(e.target.value);
@@ -353,6 +368,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Type setter"
+                  pattern="^[a-zA-Z\s]*$"
+                  title="Valid only words"
                   value={typeSetter}
                   onChange={(e) => {
                     setTypeSetter(e.target.value);
@@ -368,6 +385,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Weight(g)"
+                  min="0"
+                  title="Please use positive values"
                   value={weight}
                   onChange={(e) => {
                     setWeight(e.target.value);
@@ -381,6 +400,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Market Price"
+                  min="0"
+                  title="Please use positive values"
                   value={marketPrice}
                   onChange={(e) => {
                     setMarketPrice(e.target.value);
@@ -408,6 +429,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Cover cost"
+                  min="0"
+                  title="Please use positive values"
                   value={coverCost}
                   onChange={(e) => {
                     setCoverCost(e.target.value);
@@ -421,6 +444,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="License Cost"
+                  min="0"
+                  title="Please use positive values"
                   value={licenseCost}
                   onChange={(e) => {
                     setLicenseCost(e.target.value);
@@ -434,6 +459,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Writer Payment"
+                  min="0"
+                  title="Please use positive values"
                   value={writerPayment}
                   onChange={(e) => {
                     setWriterPayment(e.target.value);
@@ -449,6 +476,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="Proof Reader Payment"
+                  min="0"
+                  title="Please use positive values"
                   value={proofReadingPayment}
                   onChange={(e) => {
                     setProofReadingPayment(e.target.value);
@@ -461,6 +490,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                 <input
                   type="text"
                   className="form-control form-control-user"
+                  min="0"
+                  title="Please use positive values"
                   value={typeSetterPayment}
                   onChange={(e) => {
                     setTypeSetterPayment(e.target.value);
@@ -472,6 +503,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                 <small class="form-text text-color">Print Cost</small>
                 <input
                   type="text"
+                  min="0"
+                  title="Please use positive values"
                   className="form-control form-control-user"
                   value={printCost}
                   onChange={(e) => {
@@ -487,6 +520,8 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                 <input
                   type="text"
                   className="form-control form-control-user"
+                  min="0"
+                  title="Please use positive values"
                   value={other}
                   onChange={(e) => {
                     setOther(e.target.value);

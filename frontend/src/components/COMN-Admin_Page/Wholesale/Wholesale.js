@@ -79,6 +79,8 @@ const Wholesale = () => {
                         type="number"
                         className="form-control form-control-user"
                         placeholder="Total Amount"
+                        min="0"
+                        title="Please use positive values"
                         onChange={(e) => setAmount(e.target.value)}
                         required
                       />

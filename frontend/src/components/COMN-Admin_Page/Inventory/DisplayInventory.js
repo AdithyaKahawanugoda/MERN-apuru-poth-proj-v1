@@ -80,17 +80,19 @@ const DisplayInventory = (books) => {
               })}
               <thead className="bg-mattBlackLight">
                 <tr style={{ height: 50 }}>
-                  <th scope="col" style={{ width: 300 }}>
+                  <th scope="col" style={{ width: "30%" }}>
                     NAME
                   </th>
-                  <th scope="col">MARCKET PRICE</th>
-                  <th scope="col">ISBN</th>
+                  <th scope="col">MARKET PRICE</th>
+                  <th scope="col" style={{ width: "20%" }}>
+                    ISBN
+                  </th>
                   <th scope="col">IN-STOCK QUANTITY</th>
 
-                  <th scope="col" style={{ width: 100 }}>
+                  <th scope="col" style={{ width: "10%" }}>
                     UPDATE
                   </th>
-                  <th scope="col" style={{ width: 100 }}>
+                  <th scope="col" style={{ width: "10%" }}>
                     DELETE
                   </th>
                 </tr>
@@ -99,7 +101,7 @@ const DisplayInventory = (books) => {
                 {items.map((item) => (
                   <tr>
                     <td scope="col">{item.publishingTitle}</td>
-                    <td scope="col">{item.marketPrice}</td>
+                    <td scope="col">LKR {item.marketPrice}</td>
                     <td scope="col">{item.ISBN}</td>
                     <td scope="col">{item.quantity}</td>
 
@@ -112,7 +114,6 @@ const DisplayInventory = (books) => {
                         onClick={() => {
                           updateProduct(item._id);
                         }}
-                        style={{ width: 95 }}
                       >
                         Update
                       </Button>
@@ -123,7 +124,6 @@ const DisplayInventory = (books) => {
                         color="secondary"
                         className={classes.button}
                         startIcon={<DeleteIcon />}
-                        style={{ width: 90 }}
                         onClick={() => {
                           deleteProduct(item._id);
                         }}

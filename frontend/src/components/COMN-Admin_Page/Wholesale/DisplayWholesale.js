@@ -85,8 +85,8 @@ const DisplayWholesale = (orders) => {
                   <th scope="col">Total Amount</th>
                   <th scope="col">Date</th>
                   <th scope="col">Description</th>
-                  <th scope="col" style={{ width: 90 }}></th>
-                  <th scope="col" style={{ width: 90 }}></th>
+                  <th scope="col" style={{ width: "10%" }}></th>
+                  <th scope="col" style={{ width: "10%" }}></th>
                 </tr>
               </thead>
               <tbody>
@@ -94,7 +94,7 @@ const DisplayWholesale = (orders) => {
                   <tr>
                     <td scope="col">{item.retailShop}</td>
                     <td scope="col">{item.invoiceId}</td>
-                    <td scope="col">{item.amount}</td>
+                    <td scope="col">LKR {item.amount}</td>
                     <td scope="col">{item.placeDate.split("T", 1)}</td>
                     {/* {console.log("SplitCheck: " + item.placeDate.split("T", 1))} */}
                     <td scope="col">{item.description}</td>
