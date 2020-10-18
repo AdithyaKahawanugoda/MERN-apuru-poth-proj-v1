@@ -25,7 +25,7 @@ const AdminHeader = () => {
         <div class="sidebar">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <Link to="/admin" class="admin-nav-link px-2">
+              <Link to="/admin" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   insert_chart
                 </i>
@@ -33,7 +33,7 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <Link to="/admin/profile" class="admin-nav-link px-2">
+              <Link to="/admin/profile" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   person
                 </i>
@@ -41,13 +41,13 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li class="">
-              <Link to='/admin/inventory' class="admin-nav-link px-2">
+              <Link to='/admin/inventory' class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon"> store </i>
                 <span class="text">Inventory</span>
               </Link>
             </li>
             <li class="nav-item">
-              <Link to="/admin/delivery" class="admin-nav-link px-2">
+              <Link to="/admin/delivery" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   local_shipping
                 </i>
@@ -55,7 +55,7 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <Link to="/admin/discount" class="admin-nav-link px-2">
+              <Link to="/admin/discount" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   local_offer
                 </i>
@@ -63,7 +63,7 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <Link to="#" class="admin-nav-link px-2">
+              <Link to="#" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   cast
                 </i>
@@ -71,7 +71,7 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li class="nav-item">
-              <Link to="#" class="admin-nav-link px-2 ">
+              <Link to="#" class="admin-nav-link px-2 " style={{textDecoration: 'none'}}>
                 <i class="material-icons icon expandView sideMenuToggler">
                   view_list           
                 </i>

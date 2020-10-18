@@ -47,7 +47,7 @@ body,
 .admin-nav-link:hover .text,
 .admin-nav-link.active .icon,
 .admin-nav-link.active .text {
-  color: #ec6271;
+  color: #ff8c00;
 }
 
 * {
