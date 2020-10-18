@@ -76,7 +76,7 @@ rows: [],
 }
 
  // Draw the table
-myDoc.moveDown().table(table, 10, 150, { width: 590 });
+myDoc.moveDown().table(table, 10, 125, { width: 590 });
 myDoc.end();
 
  //res.json("Generated Success");

@@ -29,16 +29,9 @@ router.post("/create", async (req, res) => {
   }
 });
 
-//Handle incoming HTTP GET requests under /user url
-router.route('/').get(async (req, res) => {
-  //(find)mongoose method that get the list of all the users from themongodb atlas databse
-  await Order.find()
-  .then(orders => res.json(orders))
-  .catch(err => res.status(400).json('Error: ' + err));
-});
-
 // @url           /order/delete/:id
 // @description   delete order by id
+
 router.delete("/delete/:id", async (req, res) => {
   const orderID = req.params.id;
   try {
