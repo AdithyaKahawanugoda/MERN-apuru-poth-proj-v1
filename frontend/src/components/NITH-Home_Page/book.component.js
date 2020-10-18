@@ -60,7 +60,9 @@ const Book = ({ bookId, bookTitle, bookPrice, averageRating, bookImage, translat
             <img src={bookImage} width={258} onClick={productPage}/>
           </div>
           <div class="content text-color p-2">
-            <a class="header text-color " style={{fontSize: 19}}>{bookTitle}</a>
+            <a class="header text-color " style={{fontSize: 19}}>
+            {bookTitle.length > 13 ? <div>{bookTitle.substr(0, 14)}...</div> : bookTitle}
+            </a>
             <div class="description text-color">
               {translator}
             </div>
@@ -80,6 +82,7 @@ const Book = ({ bookId, bookTitle, bookPrice, averageRating, bookImage, translat
                     {averageRating}
                 </label>
               </div>
+              <div className="text-color" style={{fontSize: 16, paddingBottom: 8}}>LKR {bookPrice}.00</div>
             </Typography>
             <Button className="ui button" onClick={addToCart} style={{width:242, backgroundColor: "#ff8c00" }} startIcon= {<ShoppingCart />}>
               Add to Cart

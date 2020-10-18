@@ -3,6 +3,7 @@ import axios from "axios";
 import StarRating from "stars-rating";
 import Button from "@material-ui/core/Button";
 import FadeIn from 'react-fade-in'
+import Snackbar from '@material-ui/core/Snackbar'
 
 // Material UI Components
 import { makeStyles } from "@material-ui/core/styles";
@@ -51,6 +52,14 @@ const ProductInfromation = (productId) => {
   const [coverImage, setCoverImage] = useState(null);
   const [averageRating, setAverageRating] = useState(null);
   const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -86,6 +95,29 @@ const ProductInfromation = (productId) => {
     };
     fetchProductData();
   }, []);
+
+  const addToWishList = async () => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const data = {}
+    setOpen(true)
+    await axios.post(`http://localhost:8059/wishlist/add/${productId.productId}`,data,config)
+    .then((res) => {
+      return (
+        <Snackbar open={true} autoHideDuration={6000} onClose={handleClose} >
+          <div className="alert alert-success">
+            Item Added to Wishlist
+          </div>
+        </Snackbar>
+      )
+    })
+    .catch((err) => {
+      alert(err.message)
+    })
+  }
 
   const addToCart = () => { }
 
@@ -137,6 +169,7 @@ const ProductInfromation = (productId) => {
               </div>
               <div style={{ paddingBottom: 55 }}>
                 <Button
+                  onClick={addToWishList}
                   variant="outlined"
                   className={classes.button}
                   startIcon={<Wishlist />}

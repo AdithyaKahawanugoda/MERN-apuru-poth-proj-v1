@@ -221,7 +221,7 @@ const Inventory = () => {
                         value={ISBN}
                         className="form-control form-control-user"
                         placeholder="ISBN"
-                        pattern="((?:[\dX]{13})|(?:[\d\-X]{17})|(?:[\dX]{10})|(?:[\d\-X]{13}))"
+                     
                         title="Please enter valid ISBN code"
                         onChange={(e) => setISBN(e.target.value)}
                         required
