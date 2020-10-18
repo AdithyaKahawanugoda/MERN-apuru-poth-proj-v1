@@ -7,7 +7,7 @@ router.use(cors());
 const fs = require("fs");
 const PDFDocument = require("./pdfkit-tables");
 
-router.post("/generaterequestbook", async (req, res) => {
+router.post("/generatecartreport", async (req, res) => {
 //load cuurent time
 var currentDate = new Date();
 
@@ -30,7 +30,9 @@ minutes +
 "-" +
 seconds;
 
- const requestBookReportRequest = req.body.requestItems;
+ // // Load the exericise
+
+ const cartReportRequest = req.body.cartItems;
 // // Create The PDF document
 
  var myDoc = new PDFDocument({ bufferPages: true });
@@ -53,7 +55,7 @@ res
 myDoc
 .fillColor("#444444")
 .fontSize(20)
-.text("Book Request Report", 110, 57)
+.text("User Cart Report", 110, 57)
 .fontSize(10)
 .text("Apuru Book Publishers", 200, 50, { align: "right" })
 .text("291/B,Alawwa", 200, 65, { align: "right" })
@@ -62,16 +64,16 @@ myDoc
 
  // Create the table - https://www.andronio.me/2017/09/02/pdfkit-tables/
 const table = {
-headers: ["Request Code", "Book Name", "Author Name", "Printed Year"],
+headers: ["Item Code", "Item Name", "Quantity", "Price"],
 rows: [],
 };
 
- for (const requestItem of requestBookReportRequest) {
+ for (const cartItem of cartReportRequest) {
   table.rows.push([
-  requestItem._id,
-  requestItem.bookName,
-  requestItem.authorName,
-  requestItem.printedYear,
+  cartItem.productId,
+  cartItem.productName,
+  cartItem.quantity,
+  cartItem.productPrice,
   ]);
 }
 

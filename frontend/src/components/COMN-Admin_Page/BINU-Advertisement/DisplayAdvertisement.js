@@ -40,6 +40,7 @@ export default class DisplayAdvertisement extends Component {
                 <table className="table table-borderless table-sm">
                   <thead className="thead-light">
                     <tr>
+                      <th>Advertistment Image</th>
                       <th>Advertistment Title</th>
                       <th>Published Date</th>
                       <th>description</th>
@@ -47,9 +48,7 @@ export default class DisplayAdvertisement extends Component {
                     </tr>
                   </thead>
                   <div className="mt-2"></div>
-                  <tbody>  
-                  
-                  </tbody>
+                  <tbody>  </tbody>
                 </table>
               </div>
             </div>
