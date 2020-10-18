@@ -8,6 +8,8 @@ import Update from '@material-ui/icons/Edit'
 import Delete from '@material-ui/icons/Delete'
 import Cart from '../JAYE-cart/cart.display.component';
 import Exit from '@material-ui/icons/ExitToApp'
+import Wishlist from '../HSKI-User_Profile/wishlist.component';
+import Favslist from '../HSKI-User_Profile/favslist.component';
 
 const Profile = () => {
    const [userId, setUserId] = useState(null)
@@ -119,6 +121,8 @@ const Profile = () => {
             </div>
             <hr />
             <Cart />
+            <Wishlist/>
+            <Favslist/>
          </div>
       </div>
    )

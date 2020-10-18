@@ -108,7 +108,22 @@ const userSchema = new mongoose.Schema({
       required: true
     },
     coverImage: {
-      type: Buffer,
+      type: String,
+      required: true
+    }
+  }],
+  favsList: [{
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "products"
+    },
+    productName: {
+      type: String,
+      require: true
+    },
+    coverImage: {
+      type: String,
       required: true
     }
   }],

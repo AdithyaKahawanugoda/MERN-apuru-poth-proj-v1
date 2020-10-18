@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const auth = require('../../middleware/auth')
 const User = require('../../models/HSKI-User/user.model')
-const Product = require('../../models/ADIK-Product/product-model')
+const Product = require('../../models/ADI-Product_and_Invoice/product-model')
 
 // @url           POST/wishlist/add
-// @description   add products to the cart
+// @description   add products to the wish list
 router.post("/add", auth, async (req, res) => {
   try {
-    const { productId, price } = req.body;
+    const { productId } = req.body;
     const user = await User.findById(req.user._id)
     const product = await Product.findById(productId)
     if (!user) {
@@ -21,7 +21,7 @@ router.post("/add", auth, async (req, res) => {
     let wishlistItem = {
       productId: productId,
       productName: product.publishingTitle,
-      productPrice: price,
+      productPrice: product.marketPrice,
       coverImage: product.coverImage,
     };
 
@@ -71,7 +71,7 @@ router.get("/display", auth, async (req, res) => {
 // });
 
 // // @url           DELETE/wishlist/delete/:id
-// // @description   delete products from cart 
+// // @description   delete products from wish list 
 router.delete("/delete/:id", auth, async (req, res) => {
   const itemId = req.params.id;
   try {
