@@ -18,6 +18,7 @@ export default class DeliveryList extends Component {
     this.deleteDelivery = this.deleteDelivery.bind(this)
     this.refreshTable = this.refreshTable.bind(this)
     this.updateDelivery = this.updateDelivery.bind(this)
+    this.generatePDF = this.generatePDF.bind(this)
 
     this.state = {
       deliveries: [],
@@ -55,6 +56,24 @@ export default class DeliveryList extends Component {
       deliveryId: delId
     })
   }
+
+  generatePDF() {
+    const pdfText = {
+      deliveries: this.state.deliveries,
+    };
+
+    axios
+      .post(
+          "http://localhost:8059/deliveryreport/generatedeliverylist",
+        pdfText
+      )
+      .then(() => {
+        alert("PDF Generated Successful");
+      })
+      .catch((err) => console.log(err.message));
+  }
+
+
 
   deleteDelivery(id) {
     axios.delete("http://localhost:8059/delivery/" + id).then((response) => {
@@ -112,7 +131,7 @@ export default class DeliveryList extends Component {
               </lable>
               &nbsp;&nbsp;&nbsp;
               <label>
-                <Button className="w-100" variant="contained" startIcon={<InsertDriveFileIcon/>} disableElevation>
+                <Button onClick={this.generatePDF} className="w-100" variant="contained" startIcon={<InsertDriveFileIcon/>} disableElevation>
                   generate discount report
                 </Button> 
               </label>

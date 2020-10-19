@@ -94,6 +94,10 @@ const userSchema = new mongoose.Schema({
     },
     productImage: {
       type: String,
+      required: false
+    },
+    totalPrice: {
+      type: Number,
       required: true
     }
   }],

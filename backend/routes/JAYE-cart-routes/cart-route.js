@@ -23,7 +23,8 @@ router.post("/add", auth, async (req, res) => {
       productName: product.publishingTitle,
       productPrice: price,
       quantity: quantity,
-      productImage: image
+      productImage: image,
+      totalPrice: price * quantity
     };
 
     await User.findOneAndUpdate(
@@ -57,13 +58,14 @@ router.get("/display", auth, async (req, res) => {
 router.put("/update/:id", auth, async (req, res) => {
   const cartId = req.params.id
   try {
-    const { quantity, price } = req.body;
+    const { quantity, price, totalPrice } = req.body;
     const user = await User.findById(req.user._id)
     if (!user) {
       throw new Error('There is no user')
     }
     user.cart.id(cartId).quantity = quantity
     user.cart.id(cartId).productPrice = price
+    user.cart.id(cartId).totalPrice = totalPrice
     await user.save()
 
     res.status(200).send({ status: "quantity updated", cart: user.cart.id(cartId) });
