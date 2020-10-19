@@ -7,6 +7,7 @@ const HttpError = require("../../models/ADI-Product_and_Invoice/httpErrors");
 const pdf = require("html-pdf");
 const pdfTemplate = require("./documents");
 const { route } = require("../Binu-Adv-routes/adv.routes");
+const fs = require("fs");
 
 // @url           POST /admin/product/add
 // @description   add new book
@@ -163,7 +164,7 @@ router.post("/product/update/details/:id", async (req, res, next) => {
   const prodId = req.params.id;
 
   try {
-    const product = await Product.findById(prodId);
+    product = await Product.findById(prodId);
   } catch (err) {
     //if our get req has any issues such as missiong information
     const error = new HttpError("Product update Failed!", 500);
@@ -300,16 +301,19 @@ router.delete("/product/delete/:id", async (req, res, next) => {
 
 //POST req to create report
 router.post("/report", (req, res, next) => {
-  pdf.create(pdfTemplate(req.body), {}).toFile("ProductReport.pdf", (err) => {
-    if (err) {
-      res.send(Promise.reject());
-    }
-    res.send(Promise.resolve());
-  });
+  pdf
+    .create(pdfTemplate(req.body), {})
+    .toFile(`${__dirname}/documents/ProductReport.pdf`, (err) => {
+      if (err) {
+        res.send(Promise.reject());
+      }
+      res.send(Promise.resolve());
+    });
 });
+
 //GET req to preview report
-router.get("/getreport", (req, res, next) => {
-  res.download(`${__dirname}/ProductReport.pdf`);
-});
+// router.get("/getreport", (req, res, next) => {
+//   res.sendFile(`${__dirname}/ProductReport.pdf`);
+// });
 
 module.exports = router;

@@ -180,7 +180,7 @@ module.exports = (data) => {
                 </tr>
              </table>
              <br />
-             <h2 class="justify-center">Estimated income: ${
+             <h2 class="justify-center">Estimated income: LKR ${
                parseInt(data.quantity) * parseInt(data.marketPrice) -
                (parseInt(data.coverCost) +
                  parseInt(data.writerPayment) +
