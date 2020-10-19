@@ -12,7 +12,7 @@ import Header from './components/Layouts/Header'
 import UserLogin from './components/Layouts/UserLogin'
 import CreateRequestbook from './components/NITH-RequestBook/create-requestbook.component'
 import CartPage from './components/JAYE-cart/CartPage'
-
+import CheckOutPage from './components/JAYE-cart/CheckoutPage'
 
 function App() {
   return (
@@ -32,8 +32,9 @@ function App() {
                   <Route path="/signup" component={SignUp} exact />
                   <Route path="/product/:id" component={ProductPage} />
                   <Route path="/login" component={UserLogin} exact />
-                  <Route path="/requestbook" component={CreateRequestbook} />
-                  <Route path="/cart" component={CartPage} />
+                  <Route path="/requestbook" component={CreateRequestbook} exact />
+                  <Route path="/cart" component={CartPage} exact />
+                  <Route path="/checkout" component={CheckOutPage} exact/>
               </div>
             </Switch>
           </section>

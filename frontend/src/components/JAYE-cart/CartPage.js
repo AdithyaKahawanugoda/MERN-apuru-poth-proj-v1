@@ -6,12 +6,15 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Button from "@material-ui/core/Button";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import IconButton from '@material-ui/core/IconButton';
+import {Link} from 'react-router-dom'
+import CheckOutPage from './CheckoutPage'
 
 export default class CartPage extends Component {
   constructor(props) {
     super()
     this.calculateTotal = this.calculateTotal.bind(this);
     this.totalCal = this.totalCal.bind(this);
+    this.checkoutpage = this.checkoutpage.bind(this);
 
     this.state = {
       cartItems: [],
@@ -62,6 +65,10 @@ export default class CartPage extends Component {
     this.setState({totalPrice: total})
   }
 
+  checkoutpage() {
+    window.location = "/checkout"
+  }
+
   render() {
     return (
       <div className="container">
@@ -92,8 +99,11 @@ export default class CartPage extends Component {
                 style={{background: "#ff8c00", marginLeft: 225}} className="d-inline mb-2" onClick={this.totalCal}>
                   <AutorenewIcon/>
                 </IconButton>
+
                 <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
-                startIcon={<ShoppingBasketIcon />} disableElevation type="submit">request this book</Button>
+                startIcon={<ShoppingBasketIcon />} disableElevation type="submit"
+                onClick={this.checkoutpage}>request this book</Button>
+
               </Paper>  
             </div>
           </div> : ""}
