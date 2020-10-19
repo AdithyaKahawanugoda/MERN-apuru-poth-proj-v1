@@ -91,6 +91,10 @@ const userSchema = new mongoose.Schema({
     quantity: {
       type: Number,
       required: true
+    },
+    productImage: {
+      type: String,
+      required: true
     }
   }],
   wishList: [{

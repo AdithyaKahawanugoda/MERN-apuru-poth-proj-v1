@@ -30,7 +30,8 @@ const Book = ({ bookId, bookTitle, bookPrice, averageRating, bookImage, translat
       const cartItem = {
          productId: bookId,
          price: bookPrice,
-         quantity: 1
+         quantity: 1,
+         image: bookImage
       }
       const config = {
          headers: {
@@ -39,20 +40,23 @@ const Book = ({ bookId, bookTitle, bookPrice, averageRating, bookImage, translat
          },
       };
       await axios.post(`http://localhost:8059/cart/add`, cartItem, config)
-         .then(() => (
-
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} >
-               <Alert severity="warning">
-                  Please give your rating for product
-               </Alert>
-            </Snackbar>
-         )).catch((error) => {
-            console.log(error.message)
-         })
+        .then((res) => {
+          setOpen(true)
+        }).catch((error) => {
+          console.log(error.message)
+        })
    }
 
    return (
       <div style={{width: 260, paddingBottom: 15}}>
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}>
+          <Alert severity="success">
+              Item Added To Cart
+          </Alert>
+        </Snackbar>
         <div class="card">
           <div style={{overflow: 'hidden', height: 300}}>
             <img src={bookImage} width={258} onClick={productPage}/>

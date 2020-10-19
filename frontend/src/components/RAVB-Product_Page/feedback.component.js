@@ -74,8 +74,8 @@ const Feedback = ({ id, productId, customerId, customerName, profilePicture, rat
   }
 
   return (
-    <div className="pb-2">
-      <Paper style={{ padding: 10, borderRadius: 32 }} variant="outlined">
+    <div className="pb-2 pr-2">
+      <Paper style={{ padding: 10, borderRadius: 8 }} variant="outlined">
         <div className="row" style={{ paddingLeft: 17 }}>
           <Avatar
             alt="Remy Sharp"

@@ -11,6 +11,7 @@ import SignUp from "./components/Layouts/UserRegister";
 import Header from './components/Layouts/Header'
 import UserLogin from './components/Layouts/UserLogin'
 import CreateRequestbook from './components/NITH-RequestBook/create-requestbook.component'
+import CartPage from './components/JAYE-cart/CartPage'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                   <Route path="/product/:id" component={ProductPage} />
                   <Route path="/login" component={UserLogin} exact />
                   <Route path="/requestbook" component={CreateRequestbook} />
+                  <Route path="/cart" component={CartPage} />
               </div>
             </Switch>
           </section>

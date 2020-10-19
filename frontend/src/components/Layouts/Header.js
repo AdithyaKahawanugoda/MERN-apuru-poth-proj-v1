@@ -33,10 +33,10 @@ export default class Header extends Component {
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <Link to="/cart" class="nav-link">
               <i><ShoppingCartIcon/></i>
               <span class="text ml-1">Cart</span>
-            </a>
+            </Link>
           </li>
           <li class="nav-item">
             <Link class="nav-link" to="/me">
