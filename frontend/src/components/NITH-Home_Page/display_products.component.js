@@ -58,7 +58,7 @@ const DisplayBooks = () => {
       <div className="container">
         <div className="row">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner pt-3 pl-3 pr-3" style={{height: 480}}>
+            <div class="carousel-inner pt-3 pl-3 pr-2" style={{height: 480}}>
               {console.log(advertisement.length)}
               {advertisement.length > 0 ? 
                 <div class="carousel-item active">

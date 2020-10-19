@@ -53,7 +53,7 @@ const Cart = () => {
 
    const generateReport = async () => {
       const obj = {cartItems: cart}
-      await axios.post('http://localhost:8059/cartreport/generatecartreport', obj).then(() => {
+      await axios.post('http://localhost:8059/report-generator/generatecartreport', obj).then(() => {
         alert('Report generated')
       }).catch((err) => {
         console.log(err.message)

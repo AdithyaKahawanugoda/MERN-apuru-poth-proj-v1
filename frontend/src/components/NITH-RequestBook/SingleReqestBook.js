@@ -30,7 +30,7 @@ const SingleBookRequest = ({authorName, bookName, printedYear, itemId}) => {
   }
 
   return (
-    <div>
+    <div className="pb-2">
       <Paper variant="outlined" elevation={0} className="p-2">
         <h5 className="text-color font-weight-bold">{bookName}</h5>
         <div className="text-color">Author Name - {authorName}</div>

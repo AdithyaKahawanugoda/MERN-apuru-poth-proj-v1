@@ -6,9 +6,9 @@ const Product = require('../../models/ADI-Product_and_Invoice/product-model')
 
 // @url           POST/wishlist/add
 // @description   add products to the wish list
-router.post("/add", auth, async (req, res) => {
+router.post("/add/:id", auth, async (req, res) => {
+  const productId = req.params.id
   try {
-    const { productId } = req.body;
     const user = await User.findById(req.user._id)
     const product = await Product.findById(productId)
     if (!user) {
@@ -27,7 +27,7 @@ router.post("/add", auth, async (req, res) => {
 
     await User.findOneAndUpdate(
       { _id: req.user._id },
-      { $push: { wishlist: wishlistItem } },
+      { $push: { wishList: wishlistItem } },
       { new: true, upsert: true }
     )
     res.status(200).send({ status: "Added to Wishlist", wishlist: wishlistItem });
