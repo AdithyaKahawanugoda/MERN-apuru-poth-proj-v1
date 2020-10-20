@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import FadeIn from 'react-fade-in'
 import Snackbar from '@material-ui/core/Snackbar'
 
-// Material UI Components
 import { makeStyles } from "@material-ui/core/styles";
 import Wishlist from "@material-ui/icons/Bookmark";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
@@ -103,16 +102,9 @@ const ProductInfromation = (productId) => {
       },
     };
     const data = {}
-    setOpen(true)
     await axios.post(`http://localhost:8059/wishlist/add/${productId.productId}`,data,config)
     .then((res) => {
-      return (
-        <Snackbar open={true} autoHideDuration={6000} onClose={handleClose} >
-          <div className="alert alert-success">
-            Item Added to Wishlist
-          </div>
-        </Snackbar>
-      )
+      setOpen(true)
     })
     .catch((err) => {
       alert(err.message)
@@ -120,7 +112,6 @@ const ProductInfromation = (productId) => {
   }
 
   const addToCart = () => { }
-
   if (loading) {
     return <div className="d-flex justify-content-center" style={{ paddingTop: 400 }}>
       <CircularProgress />
@@ -129,6 +120,14 @@ const ProductInfromation = (productId) => {
 
   return (
     <div className="container">
+    <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'left',
+    }}>
+    <div className="alert alert-success">
+      Item Added to Wishlist
+    </div>
+  </Snackbar>
       <div style={{ paddingTop: 30 }}>
         <div className="row">
           <div className="col-lg-8 col-sm-12 col-md-8 col-xs-12 product-col">
@@ -174,7 +173,7 @@ const ProductInfromation = (productId) => {
                   className={classes.button}
                   startIcon={<Wishlist />}
                 >
-                  Wishlist
+                  {open === true ? 'Add to Wishlist' : "Wishlist"}
               </Button>
                 <Button
                   variant="outlined"

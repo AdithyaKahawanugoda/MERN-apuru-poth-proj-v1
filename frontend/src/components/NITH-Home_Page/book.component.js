@@ -53,9 +53,9 @@ const Book = ({ bookId, bookTitle, bookPrice, averageRating, bookImage, translat
           vertical: 'bottom',
           horizontal: 'left',
         }}>
-          <Alert severity="success">
+          <div className="alert alert-success">
               Item Added To Cart
-          </Alert>
+          </div>
         </Snackbar>
         <div class="card">
           <div style={{overflow: 'hidden', height: 300}}>

@@ -22,7 +22,7 @@ router.post("/add/:id", auth, async (req, res) => {
       productId: productId,
       productName: product.publishingTitle,
       productPrice: product.marketPrice,
-      coverImage: product.coverImage,
+      coverImage: product.bookImage,
     };
 
     await User.findOneAndUpdate(
@@ -45,7 +45,7 @@ router.get("/display", auth, async (req, res) => {
     if (!user) {
       throw new Error('There is no user')
     }
-    res.status(200).send({ status: "wishlist retrieved", wishlist: req.user.wishlist });
+    res.status(200).send({ status: "wishlist retrieved", wishlist: req.user.wishList });
   } catch (error) {
     res.status(500).send({ status: "Error with /all", error: error.message });
   }

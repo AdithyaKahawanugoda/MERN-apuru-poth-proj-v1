@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Image from 'react-bootstrap/Image'
-import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from "@material-ui/core/Button";
 import Update from '@material-ui/icons/Edit'
 import Delete from '@material-ui/icons/Delete'
-import Cart from '../JAYE-cart/cart.display.component';
 import Exit from '@material-ui/icons/ExitToApp'
-import Wishlist from '../HSKI-User_Profile/wishlist.component';
-import Favslist from '../HSKI-User_Profile/favslist.component';
 import DisplayRequests from '../NITH-RequestBook/DisplayRequestBook-User'
+import DisplayWishlist from './DisplayWishlist'
 
 const Profile = () => {
    const [userId, setUserId] = useState(null)
@@ -122,6 +119,8 @@ const Profile = () => {
             </div>
             <hr />
             <DisplayRequests />
+            <hr/>
+            <DisplayWishlist/>
          </div>
       </div>
    )

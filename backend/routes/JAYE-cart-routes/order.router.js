@@ -8,7 +8,7 @@ const Order = require('../../models/JAYE-order/order.model');
 router.post("/create", async (req, res) => {
   try {
      
-    const {cusID,productID,quantity,percentage, amount,address  } = req.body;
+    const { cusID,productID,quantity,percentage, amount,address } = req.body;
     const dbOrder= {
 
       CustomerID: cusID,
