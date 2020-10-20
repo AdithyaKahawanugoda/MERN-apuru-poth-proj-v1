@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
-import { saveAs } from "file-saver";
+
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 
@@ -80,7 +80,7 @@ const UpdateProduct = ({ show, onHide, productID }) => {
     getProductDetails();
   }, [productID]);
 
-  const inventoryReport = () => {
+  const inventoryReport = async () => {
     let reportData = {
       publishingTitle: publishingTitle,
       originalTitle: originalTitle,
@@ -107,18 +107,17 @@ const UpdateProduct = ({ show, onHide, productID }) => {
       other: other,
     };
 
-    alert(reportData.publishingTitle);
+    createPDF(reportData);
+  };
 
-    axios
+  const createPDF = async (reportData) => {
+    await axios
       .post(`http://localhost:8059/inventory/report`, reportData)
-      .then(() =>
-        axios.get(`http://localhost:8059/inventory/getreport`, {
-          responseType: "blob",
-        })
-      )
-      .then((res) => {
-        const pdfBlob = new Blob([res.data], { type: "application/pdf" });
-        saveAs(pdfBlob, "newPdfReport.pdf");
+      .then(() => {
+        alert("PDF created!");
+      })
+      .catch((err) => {
+        alert(err);
       });
   };
 
@@ -247,7 +246,6 @@ const UpdateProduct = ({ show, onHide, productID }) => {
                   type="text"
                   className="form-control form-control-user"
                   placeholder="ISBN"
-
                   title="Please enter valid ISBN code"
                   value={ISBN}
                   onChange={(e) => {
@@ -542,6 +540,7 @@ const UpdateProduct = ({ show, onHide, productID }) => {
               >
                 Generate Report
               </button>
+
               <Button
                 variant="contained"
                 color="primary"

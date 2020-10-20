@@ -8,6 +8,7 @@ import Delete from '@material-ui/icons/Delete'
 import Exit from '@material-ui/icons/ExitToApp'
 import DisplayRequests from '../NITH-RequestBook/DisplayRequestBook-User'
 import DisplayWishlist from './DisplayWishlist'
+import PurchaseHistory from '../HSKI-User_Profile/purchasehistory.component';
 
 const Profile = () => {
    const [userId, setUserId] = useState(null)

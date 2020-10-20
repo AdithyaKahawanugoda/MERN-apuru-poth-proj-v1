@@ -52,7 +52,7 @@ const Favslist = () => {
  
  //    const generateReport = async () => {
  //       const obj = {favslistItems: favslist}
- //       await axios.post('http://localhost:8059/report-generator/generatecartreport', obj).then(() => {
+ //       await axios.post('http://localhost:8059/report-generator/generatefavslistreport', obj).then(() => {
  //         alert('Report generated')
  //       }).catch((err) => {
  //         console.log(err.message)
@@ -76,10 +76,8 @@ const Favslist = () => {
                    <tbody>
                       {favslist.map((row) => (
                          <tr>
-                            <td>{row._id}</td>
                             <td>{row.productName}</td>
-                            <td>{row.quantity}</td>
-                            <td>{row.productPrice}</td>
+                            <td>{row.bookImage}</td>
                          </tr>
                       ))}
                    </tbody>
