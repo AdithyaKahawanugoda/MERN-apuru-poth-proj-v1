@@ -150,8 +150,6 @@ const UpdateProduct = ({ show, onHide, productID }) => {
       other: other,
     };
 
-    alert(updatedProdCosts.other + " " + updatedProdCosts.licenseCost);
-
     await axios
       .all([
         axios.post(
