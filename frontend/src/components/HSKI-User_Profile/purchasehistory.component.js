@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 // import Update from '@material-ui/icons/Update';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-const Wishlist = () => {
-   const [wishlist, setWishlist] = useState([])
+const Purchasehistory = () => {
+   const [purchasehistory, setPurchasehistory] = useState([])
    const [loading, setLoading] = useState(true)
    const [page, setPage] = React.useState(0);
    const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -22,16 +22,16 @@ const Wishlist = () => {
 
    useEffect(() => {
       setLoading(true)
-      const getWishlistItems = async () => {
+      const getPurchasehistoryItems = async () => {
          try {
             const config = {
                headers: {
                   Authorization: localStorage.getItem("Authorization")
                },
             }
-            await axios.get(`http://localhost:8059/wishlist/display`, config)
+            await axios.get(`http://localhost:8059/purchasehistory/display`, config)
                .then((res) => {
-                  setWishlist(res.data.wishlist)
+                  setPurchasehistory(res.data.purchasehistory)
                   setLoading(false)
                })
                .catch((error) => {
@@ -41,7 +41,7 @@ const Wishlist = () => {
             console.log(error.message)
          }
       }
-      getWishlistItems()
+      getPurchasehistoryItems()
    }, [])
 
    if (loading) {
@@ -51,35 +51,39 @@ const Wishlist = () => {
    }
 
 //    const generateReport = async () => {
-//       const obj = {wishlistItems: wishlist}
-//       await axios.post('http://localhost:8059/report-generator/generatewishlistreport', obj).then(() => {
+//       const obj = {purchasehistoryItems: purchasehistory}
+//       await axios.post('http://localhost:8059/report-generator/generatepurchsehistoryreport', obj).then(() => {
 //         alert('Report generated')
 //       }).catch((err) => {
 //         console.log(err.message)
 //       })
 //    }
 
+// Create search function to search for the purchased items
+// 
+// 
+
    return (
       <div>
-         {wishlist.length !== 0 ?
+         {purchasehistory.length !== 0 ?
             <div>
-               <h3>My Wishlist</h3>
+               <h3>My Purchase History</h3>
                <hr />
                <table className="table table-bordered">
                   <thead>
                      <tr>
-                        <th scope="col">ITEM NAME</th>
-                        <th scope="col">PRICE</th>
-                        <th scope="col">COVER</th>
+                        <th scope="col">ITEMS</th>
+                        <th scope="col">TOTAL PRICE</th>
+                        <th scope="col">DISCOUNT</th>
                         <th scope="col">DELETE</th>
                      </tr>
                   </thead>
                   <tbody>
-                     {wishlist.map((row) => (
+                     {purchasehistory.map((row) => (
                         <tr>
-                           <td>{row.productName}</td>
-                           <td>{row.productPrice}</td>
-                           <td>{row.bookImage}</td>
+                           <td>{row.Item}</td>
+                           <td>{row.checkoutAmount}</td>
+                           <td>{row.percentage}</td>
                         </tr>
                      ))}
                   </tbody>
@@ -103,4 +107,4 @@ const Wishlist = () => {
    )
 }
 
-export default Wishlist
+export default Purchasehistory

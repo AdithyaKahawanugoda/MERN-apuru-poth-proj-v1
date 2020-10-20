@@ -11,6 +11,7 @@ import Exit from '@material-ui/icons/ExitToApp'
 import Wishlist from '../HSKI-User_Profile/wishlist.component';
 import Favslist from '../HSKI-User_Profile/favslist.component';
 import DisplayRequests from '../NITH-RequestBook/DisplayRequestBook-User'
+import PurchaseHistory from '../HSKI-User_Profile/purchasehistory.component';
 
 const Profile = () => {
    const [userId, setUserId] = useState(null)
