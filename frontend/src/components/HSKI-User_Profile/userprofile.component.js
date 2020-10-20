@@ -8,7 +8,8 @@ import Delete from '@material-ui/icons/Delete'
 import Exit from '@material-ui/icons/ExitToApp'
 import DisplayRequests from '../NITH-RequestBook/DisplayRequestBook-User'
 import DisplayWishlist from './DisplayWishlist'
-import PurchaseHistory from '../HSKI-User_Profile/purchasehistory.component';
+import Purchasehistory from './purchasehistory.component'
+import UpdateProfile from './updateprofile.component'
 
 const Profile = () => {
    const [userId, setUserId] = useState(null)
@@ -19,9 +20,11 @@ const Profile = () => {
    const [address2, setAddress2] = useState(null)
    const [city, setCity] = useState(null)
    const [postalCode, setPostalCode] = useState(null)
+   const [province, setProvince] = useState(null)
    const [country, setCountry] = useState(null)
    const [picture, setPicture] = useState(null)
    const [loading, setLoading] = useState(true)
+   const [show, setShow] = useState(false)
 
    useEffect(() => {
       setLoading(true)
@@ -33,27 +36,56 @@ const Profile = () => {
                },
             }
             await axios.get(`http://localhost:8059/user/profile`, config)
-               .then((res) => {
-                  setUserId(res.data.user._id)
-                  setName(res.data.user.name)
-                  setEmail(res.data.user.email)
-                  setPhone(res.data.user.phoneNumber)
-                  setAddress1(res.data.user.address_line_1)
-                  setAddress2(res.data.user.address_line_2)
-                  setCity(res.data.user.city)
-                  setPostalCode(res.data.user.postal_code)
-                  setCountry(res.data.user.country)
-                  setPicture(res.data.user.profilePicture)
-                  setLoading(false)
-               }).catch((error) => {
-                  console.log(error.message)
-               })
+              .then((res) => {
+                setUserId(res.data.user._id)
+                setName(res.data.user.name)
+                setEmail(res.data.user.email)
+                setPhone(res.data.user.phoneNumber)
+                setAddress1(res.data.user.address_line_1)
+                setAddress2(res.data.user.address_line_2)
+                setCity(res.data.user.city)
+                setProvince(res.data.user.area_province)
+                setPostalCode(res.data.user.postal_code)
+                setCountry(res.data.user.country)
+                setPicture(res.data.user.profilePicture)
+                setLoading(false)
+              }).catch((error) => {
+                console.log(error.message)
+              })
          } catch (error) {
             console.log(error.message)
          }
       }
       getUserData()
    }, [])
+
+   const updateUserProfile = () => {
+     setShow(true)
+   }
+
+   const userLogout = () => {
+     localStorage.removeItem('role')
+     localStorage.removeItem('Authorization')
+     window.location = "/login"
+   }
+
+   const deleteAccount = async () => {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+      await axios.delete('http://localhost:8059/user/delete', config)
+      .then((res) => {
+        alert('Your Account has been deleted')
+        localStorage.removeItem('role')
+        localStorage.removeItem('Authorization')
+        window.location="/signup"
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+   }
 
    if (loading) {
       return <div className="d-flex justify-content-center" style={{ paddingTop: 400 }}>
@@ -100,17 +132,20 @@ const Profile = () => {
                      </div>
                      <div className="row" style={{ paddingLeft: 15 }}>
                         <label>
-                           <Button variant="outlined" startIcon={<Update />} style={{ borderRadius: 25 }}>
-                              UPDATE MY ACCOUNT
-                        </Button>
+                          <Button variant="outlined" startIcon={<Update />} style={{ borderRadius: 25 }}
+                          onClick={updateUserProfile}>
+                            UPDATE MY ACCOUNT
+                          </Button>
                         </label>
                         <label className="pl-2">
-                           <Button variant="outlined" startIcon={<Delete />} style={{ borderRadius: 25 }}>
+                           <Button variant="outlined" startIcon={<Delete />} style={{ borderRadius: 25 }}
+                           onClick={deleteAccount}>
                               DELETE MY ACCOUNT
                         </Button>
                         </label>
                         <label className="pl-2">
-                           <Button variant="outlined" startIcon={<Exit />} style={{ borderRadius: 25 }}>
+                           <Button variant="outlined" startIcon={<Exit />} style={{ borderRadius: 25 }}
+                           onClick={userLogout}>
                               LOGOUT
                         </Button>
                         </label>
@@ -122,7 +157,23 @@ const Profile = () => {
             <DisplayRequests />
             <hr/>
             <DisplayWishlist/>
+            <hr/>
+            <Purchasehistory/>
          </div>
+         <UpdateProfile
+          upname={name}
+          upadd1={address1}
+          upadd2={address2} 
+          upcity={city}
+          uparea={province}
+          uppscode={postalCode}
+          upcountry={country}
+          upphone={phoneNumber}
+          upemail={email}
+          picture={picture}
+          show={show}
+          onHide={() => setShow(false)}
+        />
       </div>
    )
 }

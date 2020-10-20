@@ -22,6 +22,7 @@ export default class DeliveryList extends Component {
 
     this.state = {
       deliveries: [],
+      searchDeliveryList: "",
       show: false,
       onHide: true,
       deliveryId: null
@@ -113,6 +114,39 @@ export default class DeliveryList extends Component {
     });
   }
 
+  searchDeliveryList() {
+
+    return this.state.deliveries.map((currentdelivery) => {
+      if (
+        this.state.searchDeliveryList ==
+        currentdelivery.destination
+      ) {
+        return (
+          <tr>
+            <td style={{ width: "12.5%" }}>{currentdelivery._id}</td>
+            <td style={{ width: "12.5%" }}>{currentdelivery.destination}</td>
+            <td style={{ width: "12.5%" }}>{currentdelivery.method}</td>
+            <td style={{ width: "12.5%" }}>{currentdelivery.handoverdate}</td>
+            <td style={{ width: "12.5%" }}>{currentdelivery.receiver}</td>
+            <td style={{ width: "12.5%" }}>{currentdelivery.noofbooks}</td>
+            <td style={{ width: "12.5%" }}>{currentdelivery.deliverydate}</td>
+
+            <td style={{ width: "20%" }}>
+            <IconButton aria-label="edit" size="small"
+            onClick={() => {this.updateDelivery(currentdelivery._id);}}>
+              <EditIcon/>
+            </IconButton>
+            <IconButton aria-label="delete" size="small"
+            onClick={() => {this.deleteDelivery(currentdelivery._id);}}>
+              <DeleteIcon/>
+            </IconButton>
+            </td>
+          </tr>
+        );
+      }
+    });
+  }
+
   render() {
     return (
       <div className="pt-3">
@@ -125,16 +159,25 @@ export default class DeliveryList extends Component {
           <div className="card-body">
           <div className="row mx-auto">
               <lable>
-                <Button className="w-100" variant="contained" onClick={this.refreshTable} startIcon={<RefreshIcon/>} disableElevation>
-                  refresh table
-                </Button> 
+                 <Button className="w-100" variant="contained" onClick={this.refreshTable} startIcon={<RefreshIcon/>} disableElevation> 
+                   refresh table 
+                 </Button>  
               </lable>
               &nbsp;&nbsp;&nbsp;
               <label>
-                <Button onClick={this.generatePDF} className="w-100" variant="contained" startIcon={<InsertDriveFileIcon/>} disableElevation>
-                  generate discount report
-                </Button> 
+                 <Button onClick={this.generatePDF} className="w-100" variant="contained" startIcon={<InsertDriveFileIcon/>} disableElevation> 
+                   generate Delivery report 
+                 </Button>  
               </label>
+                
+              <label>
+                <div className="col-md-9">
+                  <div class="form-group" style={{width: 330}}>
+                    <input type="text" class="form-control d-inline" placeholder="Search by Destination" onChange={(e) => {this.setState({searchDeliveryList: e.target.value});}}/>
+                  </div>
+                </div>
+              </label>
+
               </div>
             <table className="table table-borderless table-sm">
               <thead className="thead-light">
@@ -149,7 +192,9 @@ export default class DeliveryList extends Component {
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody>{this.deliveryList()}</tbody>
+
+              <div className="mt-2"></div>
+                <tbody>{this.state.searchDeliveryList == "" ? this.deliveryList(): this.searchDeliveryList()}</tbody>
             </table>
           </div>
         </div>

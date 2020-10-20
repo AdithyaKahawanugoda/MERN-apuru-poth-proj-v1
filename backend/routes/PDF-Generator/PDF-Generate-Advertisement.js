@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const moment = require("moment");
 
 router.use(cors());
 
 const fs = require("fs");
 const PDFDocument = require("./pdfkit-tables");
 
-router.post("/generatedeliverylist", async (req, res) => {
+router.post("/generateadvertisementlist", async (req, res) => {
 //load cuurent time
 var currentDate = new Date();
 
@@ -31,7 +30,7 @@ minutes +
 "-" +
 seconds;
 
- const requestDeliveries = req.body.deliveries;
+ const requestAdvertisements = req.body.advertisements;
 // // Create The PDF document
 
  var myDoc = new PDFDocument({ bufferPages: true });
@@ -44,7 +43,7 @@ res
 .writeHead(200, {
 "Content-Length": Buffer.byteLength(pdfData),
 "Content-Type": "application/pdf",
-"Content-disposition": `attachment;filename=deliverylist_${timestamp}.pdf`,
+"Content-disposition": `attachment;filename=advertisementlist_${timestamp}.pdf`,
 })
 .end(pdfData);
 });
@@ -54,7 +53,7 @@ res
 myDoc
 .fillColor("#444444")
 .fontSize(20)
-.text("Book Request Deliveries", 110, 57)
+.text("Book Advertisement", 110, 57)
 .fontSize(10)
 .text("Apuru Book Publishers", 200, 50, { align: "right" })
 .text("291/B,Alawwa", 200, 65, { align: "right" })
@@ -63,19 +62,20 @@ myDoc
 
  // Create the table - https://www.andronio.me/2017/09/02/pdfkit-tables/
 const table = {
-headers: ["ID", "Destination", "Method", "Handover Date", "receiver","No Of Books","Delivery Date"],
+headers: ["id", "title", "publisheddate", "description"],
 rows: [],
 };
 
- for (const delivery of requestDeliveries) {
+ for (const advertisement of requestAdvertisements) {
   table.rows.push([
-    delivery._id,
-    delivery.destination,
-    delivery.method,
-    moment(delivery.handoverdate).format('LL'),
-    delivery.receiver,
-    delivery.noofbooks,
-    moment(delivery.deliverydate).format('LL')
+
+
+    advertisement._id,
+    advertisement.title,
+    advertisement.publisheddate,
+    advertisement.description,
+
+ 
   ]);
 }
 

@@ -68,11 +68,12 @@ router.get("/one/:id", async (req, res) => {
 router.post("/update/:id", async (req, res) => {
   const AId = req.params.id;
   try {
-    const { title, pdate, text } = req.body;
+    const { title, pdate, text, imageUrl } = req.body;
     const updateAValues = {
       title: title,
       publisheddate: pdate,
-      text: text,
+      description: text,
+      image: imageUrl
     };
     const updateAdvertisement = await Advertisement.findByIdAndUpdate(AId, updateAValues);
     res.status(200).send({ status: "Advertisement updated", advertisement: updateAdvertisement });

@@ -5,6 +5,7 @@ import CreateFeedback from "./create-feedback.component";
 import Ratings from "./ratings.component";
 import FadeIn from 'react-fade-in'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import UpdateFeedback from './UpdateFeedback'
 
 const Feedbacks = (productId) => {
   const [loading, setLoading] = useState(true);

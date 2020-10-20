@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import jwt from 'jsonwebtoken'
 import axios from 'axios'
+import UpdateFeedback from './UpdateFeedback'
 
 // @ material ui styles
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +44,8 @@ const Feedback = ({ id, productId, customerId, customerName, profilePicture, rat
   const deleteButton = useDelete();
   const update = useUpdate();
   const token = localStorage.getItem('Authorization')
+  const [open, setOpen] = useState(false)
+  const [onHide, setOnHide] = useState(true)
   const forceUpdate = useForceUpdate()
   let verify = null
   if (token) {
@@ -55,6 +58,10 @@ const Feedback = ({ id, productId, customerId, customerName, profilePicture, rat
     verify = null
   }
 
+  const updateComment = () => {
+    setOpen(true)
+    setOnHide(true)
+  }
 
   const deleteComment = async () => {
     const config = {
@@ -115,13 +122,22 @@ const Feedback = ({ id, productId, customerId, customerName, profilePicture, rat
                 <IconButton aria-label="delete" color="inherit" onClick={deleteComment}>
                   <DeleteIcon className={deleteButton.root} fontSize="small" />
                 </IconButton>
-                <IconButton aria-label="update" color="inherit">
+                <IconButton aria-label="update" color="inherit" onClick={updateComment}>
                   <UpdateIcon className={update.root} fontSize="small" />
                 </IconButton>
               </div>
             </div>}
         </div>
       </Paper>
+
+      <UpdateFeedback 
+        comment={comment}
+        rating={rating}
+        feedbackId={id}
+        productId={productId}
+        show={open}
+        onHide={() => setOpen(false)}
+      />
     </div>
   );
 };

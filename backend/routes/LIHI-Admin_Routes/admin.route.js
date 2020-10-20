@@ -19,6 +19,7 @@ router.post('/create', async (req, res) => {
       DOB: DOB,
       profileImage: profileImage,
       password: password,
+      role: "admin"
     }
 
     const newAdmin = new Admin(admin)
@@ -48,7 +49,7 @@ router.post('/adminlogin', async (req, res) => {
     res.status(200).send({token: token, admin: admin})
   } catch (error) {
     res.status(500).send({ error: error.message });
-    console.log(error.message);
+    console.log(error);
   }
 })
 

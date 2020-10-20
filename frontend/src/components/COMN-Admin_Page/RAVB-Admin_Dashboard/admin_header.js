@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "./dashboard";
 import Inventory from '../Inventory/Inventory'
@@ -12,6 +12,21 @@ import './style.css'
 
 
 const AdminHeader = () => {
+
+  useEffect(() => {
+    if (localStorage.getItem('role') !== 'admin') {
+      localStorage.removeItem('role')
+      localStorage.removeItem('Authorization')
+      window.location = '/adminlogin'
+    }
+  })
+
+  const adminLogout = () => {
+    localStorage.removeItem('role')
+    localStorage.removeItem('Authorization')
+    window.location = '/adminlogin'
+  }
+
   return (
     <div id="page-top">
 
@@ -77,6 +92,14 @@ const AdminHeader = () => {
                   view_list           
                 </i>
                 <span class="text">Resize</span>
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link to="#" class="admin-nav-link px-2 " style={{textDecoration: 'none'}} onClick={adminLogout}>
+                <i class="material-icons icon expandView sideMenuToggler">  
+                  exit_to_app        
+                </i>
+                <span class="text">Logout</span>
               </Link>
             </li>
           </ul>

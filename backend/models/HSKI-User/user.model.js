@@ -117,7 +117,7 @@ const userSchema = new mongoose.Schema({
     },
     coverImage: {
       type: String,
-      required: true
+      required: false
     },
   }],
   favsList: [{
@@ -135,6 +135,10 @@ const userSchema = new mongoose.Schema({
       required: true
     }
   }],
+  role: {
+    type: String,
+    required: true
+  },
   tokens: [
     {
       token: {

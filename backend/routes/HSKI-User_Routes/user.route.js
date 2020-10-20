@@ -45,6 +45,7 @@ router.post("/signup", async (req, res) => {
       email: email,
       password: pwd,
       profilePicture: imageUrl,
+      role: "user"
     };
 
     const newUser = new User(user);
@@ -79,18 +80,7 @@ router.get("/profile", auth, async (req, res) => {
 // @url           PUT /user/update/:id
 // @description   update user by id
 // @Action        private
-router.put(
-  "/update/:id",
-  auth,
-  upload.single("profilePic"),
-  async (req, res) => {
-    const Id = req.params.id;
-
-    const profilePicture = await sharp(req.file.buffer)
-      .resize({ width: 250, height: 250 })
-      .png()
-      .toBuffer();
-
+router.put("/update",auth,async (req, res) => {
     const {
       name,
       add1,
@@ -100,13 +90,11 @@ router.put(
       pscode,
       country,
       phone,
-      DOB,
       email,
-      password,
     } = req.body;
 
     // Encrypt the passowrd
-    const hashpassword = await bcrypt.hash(password, 8);
+    //const hashpassword = await bcrypt.hash(password, 8);
 
     try {
       const updateValues = {
@@ -118,16 +106,17 @@ router.put(
         postal_code: pscode,
         country: country,
         phoneNumber: phone,
-        DOB: DOB,
+        DOB: req.user.DOB,
         email: email,
-        password: hashpassword,
-        profilePicture: profilePicture,
+        password: req.user.password,
+        profilePicture: req.user.profilePicture,
       };
 
-      const updateUser = await User.findByIdAndUpdate(Id, updateValues);
+      const updateUser = await User.findByIdAndUpdate(req.user.id, updateValues);
+      console.log('user updated')
       res.status(200).send({ status: "User updated", user: updateUser });
     } catch (error) {
-      res.status(500).send({ error: error.message });
+      res.status(500).send({ error: error });
     }
   }
 );
@@ -135,14 +124,13 @@ router.put(
 // @url           DELETE /user/delete/:id
 // @description   delete user profile by id
 // @Action        private
-router.delete("/delete/:id", auth, async (req, res) => {
-  const userID = req.params.id;
+router.delete("/delete", auth, async (req, res) => {
   try {
-    const user = await User.findById(userID);
+    const user = await User.findById(req.user.id);
     if (!user) {
       throw new Error("There is no user to delete");
     }
-    const deleteProfile = await User.findByIdAndDelete(userID);
+    const deleteProfile = await User.findByIdAndDelete(req.user.id);
     res.status(200).send({ status: "user deleted", user: deleteProfile });
   } catch (error) {
     res

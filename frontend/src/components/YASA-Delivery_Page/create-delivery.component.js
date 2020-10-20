@@ -17,7 +17,7 @@ export default class CreateDelivery extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   
     this.state = {
-      _id:'',
+      _id:'order',
       destination: '',
       method: '',
       handoverdate: new Date(),
@@ -25,12 +25,13 @@ export default class CreateDelivery extends Component {
       noofbooks: 0,
       deliverydate: new Date(),
       orders:[],
+      singleOrder:""
     }
   }
       
   componentDidMount() {
     axios
-      .get("http://localhost:8059/order/")
+      .get("http://localhost:8059/order")
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
@@ -43,7 +44,37 @@ export default class CreateDelivery extends Component {
         console.log(error);
       });
   }
-  onChange_id(e) { this.setState({_id: e.target.value})}
+  onChange_id(e) { 
+    
+    this.setState({_id: e.target.value})
+    console.log('hello')
+  
+    axios
+    .get(`http://localhost:8059/order/getorder/${e.target.value}`)
+    .then((response) => {
+      
+
+      let totalQuantity = 0 ;
+      response.data.order.items.map((item) => {
+
+        totalQuantity = totalQuantity + item.quantity;
+
+      })
+
+
+        this.setState({
+          singleOrder: response.data,
+          receiver:response.data.order.customerName,
+          destination:response.data.order.cutomerAddress,
+          noofbooks:totalQuantity
+        });
+      
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  
+  }
   onChangeDestination(e) { this.setState({destination: e.target.value})}
   onChangeMethod(e) {this.setState({method: e.target.value})}
   onChangeHandoverDate(date) {this.setState({handoverdate: date})}
@@ -89,8 +120,11 @@ export default class CreateDelivery extends Component {
             <form onSubmit={this.onSubmit} className="text-color">
               <div className="form-group"> 
                 <label>Order ID: </label>
-                <select ref="userInput" required  className="form-control"  value={this.state._id}
+                <select ref="userInput" required  className="form-control"
                 onChange={this.onChange_id}>
+                  <option value="order">
+                      Select Order ID
+                  </option>
                   {this.state.orders.map(function (order) {
                     return (
                       <option key={order} value={order}>
@@ -103,7 +137,7 @@ export default class CreateDelivery extends Component {
               <div className="form-group"> 
                 <label>Destination: </label>
                 <input type="text" required className="form-control" value={this.state.destination}
-                onChange={this.onChangeDestination}/>
+                onChange={this.onChangeDestination} disabled/>
               </div>
               <div className="form-group"> 
                 <label>method: </label>
@@ -127,12 +161,12 @@ export default class CreateDelivery extends Component {
               <div className="form-group"> 
                 <label>Receiver: </label>
                 <input  type="text" required className="form-control" value={this.state.receiver}
-                onChange={this.onChangeReceiver} />
+                onChange={this.onChangeReceiver} disabled/>
               </div>
               <div className="form-group">      
                 <label>Number of books: </label>
-                <input type="number" required className="form-control" value={this.state.noofbooks}
-                onChange={this.onChangeNoofbooks} />
+                <input type="number" required className="form-control disabled" value={this.state.noofbooks}
+                onChange={this.onChangeNoofbooks} disabled/>
               </div>
               <div className="form-group">
                 <input type="submit" value="ADD DELIVERY" className="btn btn-warning btn-block" />

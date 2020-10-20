@@ -1,6 +1,6 @@
-
 const router = require('express').Router();
 let Delivery = require('../../models/YASA-Delivery/delivery.model');
+let Order = require('../../models/JAYE-order/order.model')
 
 //@route            /delivery
 //@description      fetch delivery details
@@ -12,7 +12,7 @@ router.route('/').get((req, res) => {
 
 //@route           delivery/add
 //@description     Inserting delivery information
-router.route('/add').post((req, res) => {
+router.route('/add').post(async (req, res) => {
   const _id = req.body._id;  
   const destination = req.body.destination;
   const method = req.body.method;
@@ -31,7 +31,12 @@ router.route('/add').post((req, res) => {
     deliverydate,
   });
 
-  newDelivery.save()
+  await Order.findOneAndUpdate(
+    {_id: _id},
+    {deliveryDate: deliverydate, handOverDate: handoverdate }
+  )
+
+  await newDelivery.save()
   .then(() => res.json('Delivery added!'))
   .catch((err)=> {
     res.status(500).json('Error: ' + err)

@@ -3,7 +3,7 @@ const router = express.Router();
 const Feedback = require("../../models/RAVB-Feedback_Model/feedback.model")
 const Product = require("../../models/ADI-Product_and_Invoice/product-model");
 
-router.get('/getchart', async (req, res) => {
+router.get('/getchart', async (req, res) => { 
   try {
     const product = await Product.find({})
     res.status(200).send({products: product})

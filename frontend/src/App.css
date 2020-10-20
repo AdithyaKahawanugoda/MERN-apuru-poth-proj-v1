@@ -19,6 +19,10 @@ body {
   background: url("https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Frequest_book.jpg?alt=media&token=b3ec89bf-65b9-4fec-a4c3-d9a45a024ea2");
 }
 
+.bg-admin-login {
+  background: url("https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Fadmin_login.jpg?alt=media&token=b134f834-bb47-4a03-b797-54b9cced0a79");
+}
+
 .App {
   text-align: center;
 }
@@ -112,4 +116,14 @@ textarea {
 .nopadding {
   padding: 0 !important;
   margin: 0 !important;
+}
+
+.form-serach {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 100px;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  background-color: #fff;
+  background-clip: padding-box;
 }

@@ -13,7 +13,8 @@ export default class UserLogin extends Component {
     this.state = {
       email: "",
       password: "",
-      token: ""
+      token: "",
+      role: ""
     }
   }
 
@@ -26,8 +27,11 @@ export default class UserLogin extends Component {
 
     await axios.post('http://localhost:8059/user/login', userData)
     .then((res) => {
-      this.setState({token: res.data.token })
+      this.setState({
+        token: res.data.token
+      })
       localStorage.setItem("Authorization", res.data.token)
+      localStorage.setItem("role", res.data.user.role)
       window.location = "/me"
     })
     .catch((err) => {

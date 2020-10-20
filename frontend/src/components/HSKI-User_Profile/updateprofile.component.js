@@ -1,299 +1,128 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Modal } from "react-bootstrap";
-import TextField from "@material-ui/core/TextField";
-import NativeSelect from "@material-ui/core/NativeSelect";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import { makeStyles } from "@material-ui/core/styles";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Button from "@material-ui/core/Button";
-import SaveIcon from "@material-ui/icons/Save";
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(0),
-        minWidth: 120,
-        borderRadius: 27 + "px",
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-    button: {
-        margin: theme.spacing(0),
-        borderRadius: 27 + "px",
-    },
-    formInput: {
-        margin: theme.spacing(0),
-        borderRadius: 27 + "px",
-    },
-    input: {
-        display: "none",
-    },
-}));
+import SendIcon from '@material-ui/icons/Send';
 
 const UpdateProfile = ({
-    name,
-    add1,
-    add2,
-    city,
-    area,
-    pscode,
-    country,
-    phone,
-    email,
-    pwd,
-    // imageUrl
+    upname,
+    upadd1,
+    upadd2,
+    upcity,
+    uparea,
+    uppscode,
+    upcountry,
+    upphone,
+    upemail,
+    show, 
+    onHide
 }) => {
-    const [name, setName] = useState(null)
-    const [add1, setAddress1] = useState(null)
-    const [add2, setAddress2] = useState(null)
-    const [city, setCity] = useState(null)
-    const [area, setArea] = useState(null)
-    const [pscode, setPostalCode] = useState(null)
-    const [country, setCountry] = useState(null)
-    const [phone, setPhone] = useState(null)
-    const [email, setEmail] = useState(null)
-    const [pwd, setPassword] = useState(null)
-    // const [imageUrl, setPicture] = useState(null)
-    const classes = useStyles();
+    const [name, setName] = useState(upname)
+    const [add1, setAddress1] = useState(upadd1)
+    const [add2, setAddress2] = useState(upadd2)
+    const [city, setCity] = useState(upcity)
+    const [area, setArea] = useState(uparea)
+    const [pscode, setPostalCode] = useState(uppscode)
+    const [country, setCountry] = useState(upcountry)
+    const [phone, setPhone] = useState(upphone)
+    const [email, setEmail] = useState(upemail)
+
+    const updateUserProfile = async (e) => {
+      e.preventDefault()
+      const config = {
+        headers: {
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      };
+
+      const updateObject = {
+        name: name,
+        add1: add1,
+        add2: add2,
+        city: city,
+        area: area,
+        pscode: pscode,
+        country: country,
+        phone: phone,
+        email: email,
+      }
+
+      await axios.put('http://localhost:8059/user/update', updateObject, config)
+      .then((res) => {
+        alert(res.data.status)
+        window.location = "/me"
+      })
+      .catch((err) => {
+        console.log(err)
+        alert(err.message)
+      })
+    }
 
     return (
         <div>
-            <Modal
-                show={show}
-                onHide={onHide}
-                animation={false}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        {`Hello ${name} Update your profile here`}
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <form>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Name"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={add1}
-                                onChange={(e) => setAddress1(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={add2}
-                                onChange={(e) => setAddress2(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={area}
-                                onChange={(e) => setArea(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={pscode}
-                                onChange={(e) => setPostalCode(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Email Address"
-                                variant="outlined"
-                                type="text"
-                                size="small"
-                                fullWidth
-                                value={pwd}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                        {/* <div className="form-group">
-                            <FormControl
-                                variant="outlined"
-                                className={classes.formControl}
-                                size="small"
-                                fullWidth
-                            >
-                                <InputLabel id="demo-simple-select-outlined-label">
-                                    Status
-                  </InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-outlined-label"
-                                    id="demo-simple-select-outlined"
-                                    value={myDescription}
-                                    onChange={(e) => setMyDescriptio(e.target.value)}
-                                    label="Status"
-                                >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
-                                    <MenuItem value="">None</MenuItem>
-                                    <MenuItem value="Work from Home">🏠Work from Home</MenuItem>
-                                    <MenuItem value="Busy at the moment">
-                                        🧑‍💼Busy at the moment
-                    </MenuItem>
-                                    <MenuItem value="I'm free now">😃I'm free now</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </div> */}
-                        {/* <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Current Password"
-                                variant="outlined"
-                                type="password"
-                                size="small"
-                                fullWidth
-                                onChange={(e) => setCurrentPassword(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="New Password"
-                                variant="outlined"
-                                type="password"
-                                size="small"
-                                fullWidth
-                                onChange={(e) => setNPassword(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <TextField
-                                id="outlined-basic"
-                                label="Conform Password"
-                                variant="outlined"
-                                type="password"
-                                size="small"
-                                fullWidth
-                                onChange={(e) => setCPassword(e.target.value)}
-                            />
-                        </div> */}
-                        <div className="form-group">
-                            <input
-                                className={classes.input}
-                                id="contained-button-file"
-                                multiple
-                                type="file"
-                            />
-                            <label htmlFor="contained-button-file">
-                                <Button
-                                    component="span"
-                                    variant="contained"
-                                    color="default"
-                                    fullWidth
-                                    className={classes.button}
-                                    startIcon={<CloudUploadIcon />}
-                                >
-                                    Upload profile picture
-                  </Button>
-                            </label>
-                        </div>
-                        <div className="float-right">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                size="medium"
-                                type="submit"
-                                className={classes.button}
-                                startIcon={<SaveIcon />}
-                            >
-                                Save
-                </Button>
-                        </div>
-                    </form>
-                </Modal.Body>
-            </Modal>
+        <Modal show={show} onHide={onHide} animation={true} size="lg"
+        aria-labelledby="contained-modal-title-vcenter" centered>
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter" className="text-color">Update My Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={updateUserProfile} className="text-color">  
+              <div className="form-group row mb-3">
+                <div className="col-sm-6">
+                  <input type="text" className="form-control form-control-user" value={name}
+                  onChange={(e) => setName(e.target.value)} required/>
+                  <small className="text-muted">your name</small>
+                </div>
+                <div className="col-sm-6">
+                  <input type="text" className="form-control form-control-user" value={phone}
+                  onChange={(e) => setPhone(e.target.value)} required/>
+                  <small className="text-muted">change phone number</small>
+                </div>
+              </div>     
+              <div className="form-group">
+                <input type="email" required className="form-control" value={email}
+                onChange={(e) => setEmail(e.target.value)} />
+                <small className="text-muted">chnage your email</small>
+              </div>
+              <div className="form-group row mb-3">
+                <div className="col-sm-4">
+                  <input type="text" className="form-control form-control-user" value={add1}
+                  onChange={(e) => setAddress1(e.target.value)} required/>
+                  <small className="text-muted">address line 1</small>
+                </div>
+                <div className="col-sm-4">
+                  <input type="text" className="form-control form-control-user" value={add2}
+                  onChange={(e) => setAddress2(e.target.value)} required/>
+                  <small className="text-muted">address line 2</small>
+                </div>
+                <div className="col-sm-4">
+                  <input type="text" className="form-control form-control-user" value={pscode}
+                  onChange={(e) => setPostalCode(e.target.value)} required/>
+                  <small className="text-muted">postal code</small>
+                </div>
+              </div>     
+              <div className="form-group row mb-3"> 
+                <div className="col-sm-4">
+                  <input type="text" className="form-control form-control-user" value={city}
+                  onChange={(e) => setCity(e.target.value)} required/>
+                  <small className="text-muted">chnage your city</small>
+                </div>
+                <div className="col-sm-4">
+                  <input type="text" className="form-control form-control-user" value={area}
+                  onChange={(e) => setArea(e.target.value)} required/>
+                  <small className="text-muted">your province</small>
+                </div>
+                <div className="col-sm-4">
+                  <input type="text" className="form-control form-control-user" value={country}
+                  onChange={(e) => setCountry(e.target.value)} required/>
+                  <small className="text-muted">update your country</small>
+                </div>
+              </div>
+              <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
+              startIcon={<SendIcon />} disableElevation type="submit">update my details</Button> 
+            </form>
+          </Modal.Body>
+        </Modal>
         </div>
     );
 };

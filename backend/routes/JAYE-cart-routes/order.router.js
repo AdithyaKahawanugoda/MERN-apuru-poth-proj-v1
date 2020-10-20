@@ -1,28 +1,49 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../middleware/auth")
 const Order = require('../../models/JAYE-order/order.model');
 
 // @url           /order/create
 // @description   create an order
  
-router.post("/create", async (req, res) => {
+router.post("/create",auth, async (req, res) => {
   try {
      
-    const { cusID,productID,quantity,percentage, amount,address } = req.body;
-    const dbOrder= {
+    const { cartItems, totalPrice, description } = req.body;
 
-      CustomerID: cusID,
-      Item:[{productID:productID,
-      quantity:quantity}],
-      percentage: percentage,
-      checkoutAmount: amount,
-      deliveryAddress:address,
-      
-    };
+    const address = req.user.address_line_1+ ", " + req.user.address_line_2 + "," + req.user.city + ", " + req.user.area_province
 
-    const newOrder= new Order(dbOrder);
-    await newOrder.save();
-    res.status(200).send({ status: "Order Created", order: newOrder });
+
+    const newOrder = {
+      customerId: req.user.id,
+      customerName: req.user.name,
+      customerEmail: req.user.email,
+      cutomerAddress: address,
+      totalPrice: totalPrice,
+      description: description,
+      deliveryDate: new Date(),
+      handOverDate: new Date(),
+      deliverMethod: ""
+    }
+
+
+    const order = new Order(newOrder)
+    await order.save().then(() => {
+      cartItems.map((item) => {
+        let arrayItem = {
+          itemId: item.productId,
+          itemName: item.productName,
+          quantity: item.quantity
+        }
+        order.items.unshift(arrayItem)
+        order.save()
+      })  
+    })
+
+    req.user.cart = []
+    await req.user.save()
+
+    res.status(200).send({ status: "Order Created"});
   } catch (error) {
     console.log(error.message);
     res.status(500).send({ error: error.message });
@@ -36,6 +57,15 @@ router.route('/').get(async (req, res) => {
   .then(orders => res.json(orders))
   .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.get('/getorder/:id', async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id)
+    res.status(200).send({status: 'order fetched', order: order})
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+})
 
 // @url           /order/delete/:id
 // @description   delete order by id

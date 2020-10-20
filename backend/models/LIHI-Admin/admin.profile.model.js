@@ -70,6 +70,10 @@ const AdminSchema = new mongoose.Schema({
       required: true,
     }
   }],
+  role: {
+    type: String,
+    required: true
+  },
   tokens: [{
     token: {
       type: String,
@@ -95,7 +99,7 @@ AdminSchema.methods.generateAuthToken = async function () {
 };
 
 AdminSchema.statics.findByCredentials = async (email, password) => {
-  const admin = await admin.findOne({ email });
+  const admin = await Admin.findOne({ email });
   if (!admin) {
     throw new Error("Please enter authorized email");
   }

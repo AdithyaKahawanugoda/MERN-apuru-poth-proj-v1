@@ -13,6 +13,7 @@ import UserLogin from './components/Layouts/UserLogin'
 import CreateRequestbook from './components/NITH-RequestBook/create-requestbook.component'
 import CartPage from './components/JAYE-cart/CartPage'
 import CheckOutPage from './components/JAYE-cart/CheckoutPage'
+import AdminLogin from './components/Layouts/AdminLogin'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             <Switch>
               <Route path="/admin/register" component={AdminRegister} exact/>
               <Route path="/admin" component={AdminHeader} />
-              
+              <Route path="/adminlogin" component={AdminLogin} exact />
               <div>
                 <Header/>
                   <Route path="/" component={DisplayBooks} exact />

@@ -7,6 +7,7 @@ export default class CheckOutPage extends Component {
   constructor(props) {
     super(props);
     this.calculateTotal = this.calculateTotal.bind(this);
+    this.submitCheckout = this.submitCheckout.bind(this);
 
     this.state = {
       cartItems: [],
@@ -20,6 +21,7 @@ export default class CheckOutPage extends Component {
       province: "",
       postalCode: "",
       country: "",
+      description: "",
     }
   }
 
@@ -66,6 +68,26 @@ export default class CheckOutPage extends Component {
     this.setState({totalPrice: total})
   }
 
+  async submitCheckout(e) {
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+      },
+    };
+    const data = {
+      cartItems: this.state.cartItems,
+      totalPrice: this.state.totalPrice,
+      description: this.state.description
+    }
+    await axios.post('http://localhost:8059/order/create', data, config)
+    .then((res) => {
+      alert('success')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -79,7 +101,7 @@ export default class CheckOutPage extends Component {
                 </div>
                 <h3 className="text-color d-inline pl-5 font-weight-bold">Total Price - LKR {this.state.totalPrice}.00</h3>
                 <h5 className="text-color pl-5">Number of Items - {this.state.cartItems.length}</h5>
-                <form className="user pl-5 pr-5 pb-5">
+                <form className="user pl-5 pr-5 pb-5" onSubmit={this.submitCheckout}>
                   <div className="form-group row">
                     <div className="col-sm-6 mb-3 mb-sm-0">
                       <input type="text" className="form-control form-control-user" value={this.state.userName}  required/>
@@ -96,7 +118,8 @@ export default class CheckOutPage extends Component {
                       <small className="text-muted">check your phone number</small>
                     </div>
                     <div className="col-sm-6">
-                      <input type="text" className="form-control form-control-user" value={this.state.postalCode} required/>
+                      <input type="text" className="form-control form-control-user" value={this.state.postalCode} required
+                      onChange={e => this.setState({postalCode: e.target.value})}/>
                       <small className="text-muted">please check your postal code</small>
                     </div>
                   </div>
