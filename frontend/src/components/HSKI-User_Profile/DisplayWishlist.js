@@ -63,8 +63,17 @@ export default class DisplayWishlist extends Component {
     })
   }
 
-  generateWishListReport() {
-
+  async generateWishListReport() {
+    const obj = {
+      wishlist: this.state.wishlist
+    }
+    await axios.post('http://localhost:8059/wishlistreport/generatewishlist', obj)
+    .then((res) => {
+      alert('Thank you for Downloaded!')
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
   }
 
   displayWishListItems() {
