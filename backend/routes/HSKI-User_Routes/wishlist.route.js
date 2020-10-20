@@ -51,25 +51,6 @@ router.get("/display", auth, async (req, res) => {
   }
 });
 
-// // @url           PUT/wishlist/update/:id
-// // @description   update quantity
-// router.put("/update/:id", auth, async (req, res) => {
-//   const wishlistId = req.params.id
-//   try {
-//     const { price } = req.body;
-//     const user = await User.findById(req.user._id)
-//     if (!user) {
-//       throw new Error('There is no user')
-//     }
-//     user.wishlist.id(wishlistId).productPrice = price
-//     await user.save()
-
-//     res.status(200).send({ status: "list updated", wishlist: user.wishlist.id(wishlistId) });
-//   } catch (error) {
-//     res.status(500).send({ error: error.message });
-//   }
-// });
-
 // // @url           DELETE/wishlist/delete/:id
 // // @description   delete products from wish list 
 router.delete("/delete/:id", auth, async (req, res) => {
@@ -81,7 +62,7 @@ router.delete("/delete/:id", auth, async (req, res) => {
     }
     const deleteItem = await User.update(
       { _id: req.user._id },
-      { $pull: { wishlist: user.wishlist.id(itemId) } },
+      { $pull: { wishList: user.wishList.id(itemId) } },
       { multi: true }
     )
     res.status(200).send({ status: "product removed from the list", wishlist: deleteItem });
