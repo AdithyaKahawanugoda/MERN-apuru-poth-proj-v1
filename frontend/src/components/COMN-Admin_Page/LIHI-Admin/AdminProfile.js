@@ -54,7 +54,7 @@ export default class AdminProfile extends Component {
   }
 
   uploadImage(e) {
-    e.preventDefault()
+    e.preventDefault() 
     if (this.state.image != null) {
       let folderName = "Admin-Images"
       let file = this.state.image

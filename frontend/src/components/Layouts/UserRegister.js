@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import firebase from "../../firebase";
 import Progress from "./Progress"
-
+import Snackbar from '@material-ui/core/Snackbar'
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -21,6 +21,7 @@ const SignUp = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   let [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
   const [uploadPercentage, setUploadPercentage] = useState(0);
   let fullName = null;
 
@@ -44,11 +45,17 @@ const SignUp = () => {
     }
   }
 
+  const handleClose = (reason) => {
+    if (reason === 'clickaway') {
+       return;
+    }
+    setOpen(false);
+ };
 
   const submitUserData = async (e) => {
     e.preventDefault();
     if (password1 !== passowrd2) {
-      setError("Passwords not matched");
+      setOpen(true)
     }
     fullName = firstName.concat(" ", lastName);
 
@@ -83,6 +90,14 @@ const SignUp = () => {
 
   return (
     <div className="container text-color">
+    <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}>
+      <div className="alert alert-danger">
+          Passwords are not Matched !!!
+      </div>
+    </Snackbar>
     <div className="card o-hidden border-0 shadow-lg my-5">
       <div className="card-body p-0">
         <div className="row">

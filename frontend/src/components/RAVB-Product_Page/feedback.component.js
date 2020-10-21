@@ -69,14 +69,16 @@ const Feedback = ({ id, productId, customerId, customerName, profilePicture, rat
         Authorization: localStorage.getItem("Authorization"),
         "content-type": "application/json",
       },
-    };
+    }; 
 
     await axios.delete(`http://localhost:8059/feedback/delete/${productId}/${id}`, config)
       .then((res) => {
-        console.log('comment deleted')
-        forceUpdate()
+        alert('Your Commnet Deleted')
+        window.location=`/product/${productId}`
       }).catch((error) => {
         console.log(error.message)
+        alert('Your Commnet Deleted')
+        window.location=`/product/${productId}`
       })
   }
 
