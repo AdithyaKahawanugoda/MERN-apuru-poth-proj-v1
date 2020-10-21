@@ -16,9 +16,10 @@ export default class DiscountsList extends Component {
     this.refreshTable = this.refreshTable.bind(this);
     this.deleteDiscount = this.deleteDiscount.bind(this);
     this.updateDiscount = this.updateDiscount.bind(this);
-    this.generatePDF = this.generatePDF.bind(this)
-    this.state = { 
+
+    this.state = {
       discounts: [],
+      searchDisplayDiscounts: "",
       show: false,
       onHide: true,
       discountId: null
@@ -37,23 +38,6 @@ export default class DiscountsList extends Component {
       });
   }
 
-  generatePDF() {
-    const pdfText = {
-      discounts: this.state.discounts,
-    };
-
-    axios
-      .post(
-          "http://localhost:8059/discountreport/generatediscountlist",
-        pdfText
-      )
-      .then(() => {
-        alert("PDF Generated Successful");
-      })
-      .catch((err) => console.log(err.message));
-  }
-
-
   async refreshTable() {
     await axios.get("http://localhost:8059/discounts/")
       .then((response) => {
@@ -65,7 +49,7 @@ export default class DiscountsList extends Component {
   }
 
   async updateDiscount(id) {
-    const discountId = id  
+    const discountId = id
     await this.setState({
       show: true,
       onHide: true,
@@ -94,16 +78,46 @@ export default class DiscountsList extends Component {
           <td>{currentdiscount.ammount}</td>
           <td>
             <IconButton aria-label="edit" size="small"
-            onClick={() => {this.updateDiscount(currentdiscount._id);}}>
-              <EditIcon/>
+              onClick={() => { this.updateDiscount(currentdiscount._id); }}>
+              <EditIcon />
             </IconButton>
             <IconButton aria-label="delete" size="small"
-            onClick={() => {this.deleteDiscount(currentdiscount._id);}}>
-              <DeleteIcon/>
+              onClick={() => { this.deleteDiscount(currentdiscount._id); }}>
+              <DeleteIcon />
             </IconButton>
           </td>
         </tr>
       );
+    });
+  }
+
+  searchDisplayDiscounts() {
+
+    return this.state.discounts.map((currentdiscount) => {
+      if (
+        this.state.searchDisplayDiscounts ==
+        currentdiscount.percentage
+      ) {
+        return (
+          <tr>
+            <td style={{ width: "12.5%" }}>{currentdiscount.publishingTitle}</td>
+            <td style={{ width: "12.5%" }}>{currentdiscount.marketPrice}</td>
+            <td style={{ width: "12.5%" }}>{currentdiscount.percentage}</td>
+            <td style={{ width: "12.5%" }}>{currentdiscount.validDate}</td>
+            <td style={{ width: "12.5%" }}>{currentdiscount.ammount}</td>
+            <td>
+            <IconButton aria-label="edit" size="small"
+              onClick={() => { this.updateDiscount(currentdiscount._id); }}>
+              <EditIcon />
+            </IconButton>
+            <IconButton aria-label="delete" size="small"
+              onClick={() => { this.deleteDiscount(currentdiscount._id); }}>
+              <DeleteIcon />
+            </IconButton>
+          </td>
+          </tr>
+        );
+      }
     });
   }
 
@@ -112,45 +126,53 @@ export default class DiscountsList extends Component {
       <div className="pt-3">
         <div className="card shadow mb-4 w-100">
           <div className="card-header py-3">
-              <h4 className="m-0 font-weight-bold text-primary">
-                Logged Discounts
+            <h4 className="m-0 font-weight-bold text-primary">
+              Logged Discounts
               </h4>
-            </div>
-            <div className="card-body">
-              <div className="row mx-auto">
+          </div>
+          <div className="card-body">
+            <div className="row mx-auto">
               <lable>
-                <Button className="w-100" variant="contained" onClick={this.refreshTable} startIcon={<RefreshIcon/>} disableElevation>
+                <Button className="w-100" variant="contained" onClick={this.refreshTable} startIcon={<RefreshIcon />} disableElevation>
                   refresh table
-                </Button> 
+                </Button>
               </lable>
               &nbsp;&nbsp;&nbsp;
               <label>
-                <Button className="w-100"  onClick={this.generatePDF} variant="contained" startIcon={<InsertDriveFileIcon/>} disableElevation>
+                <Button className="w-100" variant="contained" startIcon={<InsertDriveFileIcon />} disableElevation>
                   generate discount report
-                </Button> 
+                </Button>
               </label>
-              </div>
-              <div className="table-responsive">
-                <table className="table table-borderless table-sm">
-                  <thead className="thead-light">
-                    <tr>
-                      <th>Publishing Title</th>
-                      <th>Market Price</th>
-                      <th>Percentage</th>
-                      <th>Date</th>
-                      <th>Ammount</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <div className="mt-2"></div>
-                  <tbody>{this.discountList()}</tbody>
-                </table>
-              </div>
+              <label>
+                <div className="col-md-9">
+                  <div class="form-group" style={{width: 330}}>
+                    <input type="text" class="form-control d-inline" placeholder="Search by Percentage" onChange={(e) => {this.setState({searchDisplayDiscounts: e.target.value});}}/>
+                  </div>
+                </div>
+              </label>
+              
             </div>
+            <div className="table-responsive">
+              <table className="table table-borderless table-sm">
+                <thead className="thead-light">
+                  <tr>
+                    <th>Publishing Title</th>
+                    <th>Market Price</th>
+                    <th>Percentage</th>
+                    <th>Date</th>
+                    <th>Ammount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <div className="mt-2"></div>
+                <tbody>{this.state.searchDisplayDiscounts == "" ? this.discountList() : this.searchDisplayDiscounts()}</tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <UpdateDiscount 
-          show={this.state.show} 
-          onHide={() => this.setState({show: false})} 
+        <UpdateDiscount
+          show={this.state.show}
+          onHide={() => this.setState({ show: false })}
           discountId={this.state.discountId}
         />
       </div>

@@ -79,6 +79,14 @@ const AdminHeader = () => {
               </Link>
             </li>
             <li class="nav-item">
+              <Link to="/admin/delivery" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
+                <i class="material-icons icon">
+                  local_shipping
+                </i>
+                <span class="text">Delivery</span>
+              </Link>
+            </li>
+            <li class="nav-item">
               <Link to="/admin/discount" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   local_offer

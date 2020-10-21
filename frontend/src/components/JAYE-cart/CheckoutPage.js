@@ -152,7 +152,7 @@ export default class CheckOutPage extends Component {
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                   </div>
                   <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
-                  startIcon={<MenuBookIcon />} disableElevation type="submit">request this book</Button>
+                  startIcon={<MenuBookIcon />} disableElevation type="submit">confirm checkout</Button>
                 </form>
               </div>
             </div>

@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Button from "@material-ui/core/Button";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import IconButton from '@material-ui/core/IconButton';
 import {Link} from 'react-router-dom'
 import CheckOutPage from './CheckoutPage'
@@ -15,6 +16,7 @@ export default class CartPage extends Component {
     this.calculateTotal = this.calculateTotal.bind(this);
     this.totalCal = this.totalCal.bind(this);
     this.checkoutpage = this.checkoutpage.bind(this);
+    this.generateReport = this.generateReport.bind(this);
 
     this.state = {
       cartItems: [],
@@ -69,6 +71,15 @@ export default class CartPage extends Component {
     window.location = "/checkout"
   }
 
+  async generateReport() {
+    const obj = {cartItems: this.state.cartItems}
+    await axios.post('http://localhost:8059/cartreport/generatecartreport', obj).then(() => {
+      alert('Report generated')
+    }).catch((err) => {
+      console.log(err.message)
+    })
+ }
+
   render() {
     return (
       <div className="container">
@@ -102,8 +113,11 @@ export default class CartPage extends Component {
 
                 <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
                 startIcon={<ShoppingBasketIcon />} disableElevation type="submit"
-                onClick={this.checkoutpage}>request this book</Button>
+                onClick={this.checkoutpage}>purchase now</Button>
 
+                <Button variant="contained" className="w-10 mt-2" style={{ width: 100+"%"}}
+                startIcon={<InsertDriveFileIcon />} disableElevation type="submit"
+                onClick={this.generateReport}>dowload my cart details</Button>
               </Paper>  
             </div>
           </div> : ""}

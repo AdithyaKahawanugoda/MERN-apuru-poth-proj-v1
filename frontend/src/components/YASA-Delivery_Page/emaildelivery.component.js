@@ -35,7 +35,7 @@ export default function EmailDelivery() {
               </div>
               <div className="form-group">
               <label>Message</label>
-              <textarea name="message" rows="15" className="form-control"/>
+              <textarea name="message" rows="23" className="form-control"/>
               </div>    
               <div className="form-group">
               <input type="submit" value="SEND NEW DELIVERY EMAIL"  className="btn btn-primary btn-block"/>

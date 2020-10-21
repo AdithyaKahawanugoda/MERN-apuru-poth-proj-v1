@@ -27,8 +27,8 @@ const Profile = () => {
    const [show, setShow] = useState(false)
 
    useEffect(() => {
-    if (localStorage.getItem('role') !== 'user') {
-      window.location = '/admin'
+    if (localStorage.getItem('role') !== 'user' || localStorage.getItem('role') === "") {
+      window.location = '/login'
     }
    })
 

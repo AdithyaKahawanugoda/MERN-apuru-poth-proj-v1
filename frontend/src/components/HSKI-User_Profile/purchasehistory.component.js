@@ -47,10 +47,20 @@ const Purchasehistory = () => {
     getOrderHistory()
   },[])
 
+  const generateReport = async () => {
+    const obj = {purchasehistory: orders}
+    await axios.post('http://localhost:8059/purchasehistoryreport/generatepurchasehistoryreport', obj).then(()=>{
+      alert('Report generated')
+    }).catch((err)=>{
+      console.log(err.message)
+    })
+  }
+
   return (
     <div className="pb-4">
       <h3 className="text-color">Purchase History</h3>
-      <Button className="w-25" variant="contained"  className="mb-3" startIcon={<InsertDriveFileIcon/>} disableElevation>
+      <Button className="w-25" variant="contained"  className="mb-3" startIcon={<InsertDriveFileIcon/>} disableElevation
+      onClick={generateReport}>
         get purchase history
       </Button>
       <TableContainer component={Paper}>

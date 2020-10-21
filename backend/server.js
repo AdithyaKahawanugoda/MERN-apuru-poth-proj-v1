@@ -27,6 +27,7 @@ const deliveryReportGenerateRoute = require('./routes/PDF-Generator/PDF-Generate
 const discountReportGenerateRoute = require('./routes/PDF-Generator/PDF-Generate-Discount')
 const wishlistReportGenerateRoute = require('./routes/PDF-Generator/PDF-Generate-WishList')
 const advertisementReportGenerateRoute = require('./routes/PDF-Generator/PDF-Generate-Advertisement')
+const purchaseHistoryReportGenerateRoute = require('./routes/PDF-Generator/PDF-Generate-PurchseHistory')
 
 const PORT = process.env.PORT || 8059;
 
@@ -68,6 +69,7 @@ app.use('/discountreport', discountReportGenerateRoute)
 app.use('/wishlistreport', wishlistReportGenerateRoute)
 app.use('/advertismentreport', advertisementReportGenerateRoute)
 app.use('/purchasehistory', purchasehistoryRoute)
+app.use('/purchasehistoryreport', purchaseHistoryReportGenerateRoute)
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port ${PORT}`);

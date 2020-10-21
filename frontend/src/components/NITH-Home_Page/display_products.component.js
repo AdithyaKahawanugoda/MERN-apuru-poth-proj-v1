@@ -14,12 +14,6 @@ const DisplayBooks = () => {
    const [advertisement, setAdvertisement] = useState([])
 
    useEffect(() => {
-    if (localStorage.getItem('role') !== 'user') {
-      window.location = '/admin'
-    }
-   })
-
-   useEffect(() => {
       setLoading(true)
       const getProducts = async () => {
          try {

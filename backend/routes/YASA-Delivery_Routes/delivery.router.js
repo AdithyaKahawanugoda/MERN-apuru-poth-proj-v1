@@ -33,7 +33,7 @@ router.route('/add').post(async (req, res) => {
 
   await Order.findOneAndUpdate(
     {_id: _id},
-    {deliveryDate: deliverydate, handOverDate: handoverdate }
+    {deliveryDate: deliverydate, handOverDate: handoverdate, deliverMethod: method }
   )
 
   await newDelivery.save()

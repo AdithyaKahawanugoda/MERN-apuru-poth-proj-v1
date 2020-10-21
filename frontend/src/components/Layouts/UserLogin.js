@@ -68,9 +68,14 @@ export default class UserLogin extends Component {
                 <div className="text-center">
                   <a className="small" href="forgot-password.html">Forgot Password?</a>
                 </div>
-                <div className="text-center pb-5">
+                <div className="text-center">
                   <Link to="/signup">
                     <a className="small">Create New Account</a>
+                  </Link>
+                </div>
+                <div className="text-center pb-5">
+                  <Link to="/adminlogin">
+                    <a className="small">Login As Admin</a>
                   </Link>
                 </div>
               </div>

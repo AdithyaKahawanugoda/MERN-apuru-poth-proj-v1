@@ -9,7 +9,7 @@ export default class Header extends Component {
     return (
       <div>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">ApuruBook Publishers</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,16 +19,13 @@ export default class Header extends Component {
             <Link to="/" class="nav-link">Home <span class="sr-only">(current)</span></Link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Disabled</a>
-          </li>
-          <li class="nav-item">
             <Link class="nav-link" to="/requestbook">Request Book</Link>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link" to="/login">Login</Link>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link" to="/signup">Sign Up</Link>
           </li>
         </ul>
         <ul class="navbar-nav">

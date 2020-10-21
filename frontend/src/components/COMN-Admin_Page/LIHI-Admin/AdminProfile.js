@@ -45,6 +45,7 @@ export default class AdminProfile extends Component {
       })
     })
     .catch((err) => {
+      console.log(err)
       alert(err.message)
     })
   }
@@ -75,7 +76,26 @@ export default class AdminProfile extends Component {
   }
 
   async sendNewExperience(e) {
-
+    e.preventDefault()
+    const config = {
+      headers: {
+         Authorization: localStorage.getItem("Authorization")
+      },
+    }
+    const addNew = {
+      title: this.state.title, 
+      description: this.state.description, 
+      company: this.state.company,
+      from: this.state.from,  
+      to: this.state.to,
+    }
+    await axios.post('http://localhost:8059/adminprofile/addexp', addNew, config)
+    .then((res) => {
+      alert('Experience Added')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
   
   render() {
@@ -103,7 +123,7 @@ export default class AdminProfile extends Component {
                       </div>
                       <div className="form-group">
                         <input type="email" className="form-control form-control-user" value={this.state.email}
-                        onChange={e => this.setState({ email: e.target.value})}/>
+                        onChange={e => this.setState({ email: e.target.value})} required/>
                         <small className="text-muted"><i>make changes to email</i></small>
                       </div>
                       <div className="form-group">
@@ -127,7 +147,7 @@ export default class AdminProfile extends Component {
                       </div>
                       <Progress percentage={this.state.uploadPercentage}/>
                       <br/>
-                      <Button className="w-100" variant="contained" disableElevation>
+                      <Button className="w-100" variant="contained" disableElevation type="submit">
                         update account
                       </Button> 
                     </div>
@@ -146,36 +166,38 @@ export default class AdminProfile extends Component {
                 <div className="card-body">
                   <div className="row">
                     <div className="col-lg-12">
-                      <div className="form-group">
-                        <input type="text" className="form-control form-control-user" placeholder="Title" 
-                        onChange={e => this.setState({ title: e.target.value })} required/>
-                        <small className="text-muted"><i>your experience title</i></small>
-                      </div>
-                      <div className="form-group">
-                        <input type="text" className="form-control form-control-user" placeholder="Company" 
-                        onChange={e => this.setState({ company: e.target.value })} required/>
-                        <small className="text-muted"><i>tell us where you work</i></small>
-                      </div>
-                      <div className="form-group">
-                        <textarea className="form-control" rows="3" placeholder="Description" 
-                        onChange={e => this.setState({ description: e.target.value })} required></textarea>
-                        <small className="text-muted"><i>add little decription of your work</i></small>
-                      </div>
-                      <div className="form-group row">
-                        <div className="col-sm-6 mb-3 mb-sm-0">
-                          <input type="date" className="form-control form-control-user" placeholder="From"
-                          onChange={e => this.setState({ from: e.target.value})} required/>
-                          <small className="text-muted"><i>when you <b>start</b> work</i></small>
+                      <form onSubmit={this.sendNewExperience}>
+                        <div className="form-group">
+                          <input type="text" className="form-control form-control-user" placeholder="Title" 
+                          onChange={e => this.setState({ title: e.target.value })} required/>
+                          <small className="text-muted"><i>your experience title</i></small>
                         </div>
-                        <div className="col-sm-6">
-                          <input type="date" className="form-control form-control-user" placeholder="To"
-                          onChange={e => this.setState({to: e.target.value })} required/>
-                          <small className="text-muted"><i>tell us when you <b>stop</b> work on their</i></small>
+                        <div className="form-group">
+                          <input type="text" className="form-control form-control-user" placeholder="Company" 
+                          onChange={e => this.setState({ company: e.target.value })} required/>
+                          <small className="text-muted"><i>tell us where you work</i></small>
                         </div>
-                      </div>
-                      <Button className="w-100" color="primary" variant="contained" disableElevation>
-                        ADD THIS EXPERIENCE TO LIST
-                      </Button>  
+                        <div className="form-group">
+                          <textarea className="form-control" rows="3" placeholder="Description" 
+                          onChange={e => this.setState({ description: e.target.value })} required></textarea>
+                          <small className="text-muted"><i>add little decription of your work</i></small>
+                        </div>
+                        <div className="form-group row">
+                          <div className="col-sm-6 mb-3 mb-sm-0">
+                            <input type="date" className="form-control form-control-user" placeholder="From"
+                            onChange={e => this.setState({ from: e.target.value})} required/>
+                            <small className="text-muted"><i>when you <b>start</b> work</i></small>
+                          </div>
+                          <div className="col-sm-6">
+                            <input type="date" className="form-control form-control-user" placeholder="To"
+                            onChange={e => this.setState({to: e.target.value })} required/>
+                            <small className="text-muted"><i>tell us when you <b>stop</b> work on their</i></small>
+                          </div>
+                        </div>
+                        <Button className="w-100" color="primary" type="submit" variant="contained" disableElevation>
+                          ADD THIS EXPERIENCE TO LIST
+                        </Button>
+                      </form>  
                     </div>
                   </div>
                 </div>

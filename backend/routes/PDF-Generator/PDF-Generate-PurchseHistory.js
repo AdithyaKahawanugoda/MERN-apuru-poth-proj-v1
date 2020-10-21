@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
+const moment = require("moment");
 
 router.use(cors());
 
 const fs = require("fs");
 const PDFDocument = require("./pdfkit-tables");
 
-router.post("/generatecartreport", async (req, res) => {
+router.post("/generatepurchasehistoryreport", async (req, res) => {
 //load cuurent time
 var currentDate = new Date();
 
@@ -30,7 +31,10 @@ minutes +
 "-" +
 seconds;
 
- const cartReportRequest = req.body.cartItems;
+// // load the exercise
+
+ const requestPurchaseHistory = req.body.purchasehistory;
+
 // // Create The PDF document
 
  var myDoc = new PDFDocument({ bufferPages: true });
@@ -43,7 +47,7 @@ res
 .writeHead(200, {
 "Content-Length": Buffer.byteLength(pdfData),
 "Content-Type": "application/pdf",
-"Content-disposition": `attachment;filename=incompleteorderlist_${timestamp}.pdf`,
+"Content-disposition": `attachment;filename=deliverylist_${timestamp}.pdf`,
 })
 .end(pdfData);
 });
@@ -53,7 +57,7 @@ res
 myDoc
 .fillColor("#444444")
 .fontSize(20)
-.text("User Cart Report", 110, 57)
+.text("Book Request Deliveries", 110, 57)
 .fontSize(10)
 .text("Apuru Book Publishers", 200, 50, { align: "right" })
 .text("291/B,Alawwa", 200, 65, { align: "right" })
@@ -62,25 +66,25 @@ myDoc
 
  // Create the table - https://www.andronio.me/2017/09/02/pdfkit-tables/
 const table = {
-headers: ["Item Code", "Item Name", "Quantity", "Price", "Total"],
+headers: ["Order ID", "Total Price", "Delivery Date", "Handover Date", "Delivery Method"],
 rows: [],
 };
 
- for (const cartItem of cartReportRequest) {
+ for (const history of requestPurchaseHistory) {
   table.rows.push([
-  cartItem.productId,
-  cartItem.productName,
-  cartItem.quantity,
-  cartItem.productPrice,
-  cartItem.quantity * cartItem.productPrice
+    history._id,
+    history.totalPrice,
+    moment(history.deliveryDate).format('LL'),
+    moment(history.handOverDate).format('LL'),
+    history.deliverMethod,
   ]);
 }
 
  // Draw the table
-myDoc.moveDown().table(table, 10, 125, { width: 590 });
+myDoc.moveDown().table(table, 10, 150, { width: 590 });
 myDoc.end();
 
- //res.json("Generated Success");
+
 });
 
 module.exports = router;

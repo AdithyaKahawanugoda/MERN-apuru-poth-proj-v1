@@ -79,7 +79,7 @@ router.post("/logoutall", adminAuth, async (req, res) => {
 
 // @ ADMIN EXPERIENCE ROUTES
 
-router.put('/addexp', adminAuth, async (req, res) => {
+router.post('/addexp', adminAuth, async (req, res) => {
   try {
     const {title, description, company, from, to} = req.body
     const admin = await Admin.findOne({_id: req.admin.id})

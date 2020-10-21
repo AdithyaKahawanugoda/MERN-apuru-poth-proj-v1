@@ -119,7 +119,7 @@ export default class DeliveryList extends Component {
     return this.state.deliveries.map((currentdelivery) => {
       if (
         this.state.searchDeliveryList ==
-        currentdelivery.destination
+        currentdelivery.method
       ) {
         return (
           <tr>
@@ -173,7 +173,7 @@ export default class DeliveryList extends Component {
               <label>
                 <div className="col-md-9">
                   <div class="form-group" style={{width: 330}}>
-                    <input type="text" class="form-control d-inline" placeholder="Search by Destination" onChange={(e) => {this.setState({searchDeliveryList: e.target.value});}}/>
+                    <input type="text" class="form-control d-inline" placeholder="Search by Delivery Method" onChange={(e) => {this.setState({searchDeliveryList: e.target.value});}}/>
                   </div>
                 </div>
               </label>
