@@ -104,7 +104,7 @@ router.get("/product/all", async (req, res, next) => {
   try {
     allProds = await Product.find(
       {},
-      "publishingTitle marketPrice ISBN translator quantity bookImage averageRating charges"
+      "publishingTitle marketPrice ISBN translator quantity bookImage averageRating"
     ); //can fetch anything ex-charges.coverCost
     res.status(200).send({ books: allProds }); //will return with Object IDs
   } catch (err) {
@@ -164,7 +164,7 @@ router.post("/product/update/details/:id", async (req, res, next) => {
   const prodId = req.params.id;
 
   try {
-    const product = await Product.findById(prodId);
+    product = await Product.findById(prodId);
   } catch (err) {
     //if our get req has any issues such as missiong information
     const error = new HttpError("Product update Failed!", 500);
@@ -312,8 +312,8 @@ router.post("/report", (req, res, next) => {
 });
 
 //GET req to preview report
-// router.get("/getreport", (req, res, next) => {
-//   res.sendFile(`${__dirname}/ProductReport.pdf`);
-// });
+router.get("/fetch-pdf", (req, res) => {
+  res.sendFile(`${__dirname}/result.pdf`);
+});
 
 module.exports = router;
