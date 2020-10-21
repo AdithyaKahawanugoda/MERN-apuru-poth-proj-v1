@@ -28,6 +28,8 @@ const useStyles = makeStyles({
 const Purchasehistory = () => {
   const classes = useStyles();
   const [orders, setOrders] = useState([])
+  const [filterHistory, setFilterHistory] = useState([])
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     const getOrderHistory = async () => {
@@ -47,6 +49,12 @@ const Purchasehistory = () => {
     getOrderHistory()
   },[])
 
+  useEffect(() => {
+    setFilterHistory(
+      orders.filter((orders) => orders.deliveryDate.toLowerCase().includes(search.toLowerCase()))
+    )
+  }, [search, orders])
+
   const generateReport = async () => {
     const obj = {purchasehistory: orders}
     await axios.post('http://localhost:8059/purchasehistoryreport/generatepurchasehistoryreport', obj).then(()=>{
@@ -63,6 +71,14 @@ const Purchasehistory = () => {
       onClick={generateReport}>
         get purchase history
       </Button>
+      
+        <div class="input-group mb-3">
+        <div><label className="text-color">Search Monthly Delivered Orders</label></div>
+          <input type="text" class="form-control" placeholder="Search a month" aria-label="Recipient's username"  aria-describedby="basic-addon2" onChange={(e) => setSearch(e.target.value)}/>
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">Search</span>
+          </div>
+        </div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead style={{backgroundColor: "#4f535a"}}>
@@ -75,7 +91,7 @@ const Purchasehistory = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-          {orders.map((item) => (
+          {filterHistory.map((item) => (
             <TableRow key={item._id}>
               <TableCell component="th" scope="row">{item._id}</TableCell>
               <TableCell align="left">LKR {item.totalPrice}.00</TableCell>
