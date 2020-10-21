@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import TrendingDownIcon from '@material-ui/icons/TrendingDown';
+import Button from "@material-ui/core/Button";
 
 export default class CreateDiscounts extends Component {
   constructor(props) {
@@ -153,7 +155,8 @@ export default class CreateDiscounts extends Component {
                 />
               </div>
               <div className="form-group">
-                <input type="submit" value=" Create Discount" className="btn btn-primary btn-block" />
+                <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
+                startIcon={<TrendingDownIcon />} disableElevation type="submit">create delivery</Button>
               </div>
             </form>
           </div>

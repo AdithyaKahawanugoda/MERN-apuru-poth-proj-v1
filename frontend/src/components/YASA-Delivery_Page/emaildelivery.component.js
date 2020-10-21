@@ -1,5 +1,7 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
+import Button from "@material-ui/core/Button";
+import EmailIcon from '@material-ui/icons/Email';
 
 export default function EmailDelivery() {
 
@@ -38,7 +40,8 @@ export default function EmailDelivery() {
               <textarea name="message" rows="23" className="form-control"/>
               </div>    
               <div className="form-group">
-              <input type="submit" value="SEND NEW DELIVERY EMAIL"  className="btn btn-primary btn-block"/>
+              <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
+              startIcon={<EmailIcon />} disableElevation type="submit">send email</Button>
             </div>
           </form>
         </div>

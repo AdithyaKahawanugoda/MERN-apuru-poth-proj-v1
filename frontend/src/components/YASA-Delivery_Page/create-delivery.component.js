@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import "react-calendar/dist/Calendar.css";
 import Calendar from 'react-calendar';
 import axios from 'axios';
+import Button from "@material-ui/core/Button";
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 
 export default class CreateDelivery extends Component {
   constructor(props) {
@@ -169,7 +171,8 @@ export default class CreateDelivery extends Component {
                 onChange={this.onChangeNoofbooks} disabled/>
               </div>
               <div className="form-group">
-                <input type="submit" value="ADD DELIVERY" className="btn btn-warning btn-block" />
+                <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
+                startIcon={<LocalShippingIcon />} disableElevation type="submit">add delivery</Button>
               </div>
             </form>
           </div>

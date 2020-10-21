@@ -31,10 +31,10 @@ const SingleBookRequest = ({authorName, bookName, printedYear, itemId}) => {
 
   return (
     <div className="pb-2">
-      <Paper variant="outlined" elevation={0} className="p-2">
-        <h5 className="text-color font-weight-bold">{bookName}</h5>
-        <div className="text-color">Author Name - {authorName}</div>
-        <div className="text-color">Printed Year - {printedYear}</div>
+      <Paper variant="outlined" elevation={0} className="p-2" style={{backgroundColor: "#282c34"}}>
+        <h5 className="text-color-white font-weight-bold">{bookName}</h5>
+        <div className="text-color-white">Author Name - {authorName}</div>
+        <div className="text-color-white">Printed Year - {printedYear}</div>
 
         <div className="d-flex justify-content-end">
           <IconButton aria-label="edit" style={{background: "#ff8c00", marginRight: 8}}

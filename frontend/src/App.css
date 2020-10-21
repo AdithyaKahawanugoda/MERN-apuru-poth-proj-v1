@@ -131,3 +131,7 @@ textarea {
   background-color: #fff;
   background-clip: padding-box;
 }
+
+.text-color-white {
+  color: #fff;
+}
