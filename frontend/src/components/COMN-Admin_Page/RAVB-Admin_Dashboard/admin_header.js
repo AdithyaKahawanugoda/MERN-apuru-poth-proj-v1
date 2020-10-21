@@ -9,7 +9,7 @@ import SendEmail from '../../YASA-Delivery_Page/emaildelivery.component'
 import AdvertisementPage from '../BINU-Advertisement/AdvertisementPage'
 import {Link} from 'react-router-dom'
 import './style.css'
-
+import Wholesale from '../Wholesale/Wholesale'
 
 const AdminHeader = () => {
 
@@ -41,6 +41,14 @@ const AdminHeader = () => {
         <div class="sidebar">
           <ul class="navbar-nav">
             <li class="nav-item">
+              <Link to="#" class="admin-nav-link px-2 " style={{textDecoration: 'none'}}>
+                <i class="material-icons icon expandView sideMenuToggler">
+                  view_list           
+                </i>
+                <span class="text">Resize</span>
+              </Link>
+            </li>
+            <li class="nav-item">
               <Link to="/admin" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
                   insert_chart
@@ -56,18 +64,18 @@ const AdminHeader = () => {
                 <span class="text">Profile</span>
               </Link>
             </li>
-            <li class="">
+            <li class="nav-item">
               <Link to='/admin/inventory' class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon"> store </i>
                 <span class="text">Inventory</span>
               </Link>
             </li>
             <li class="nav-item">
-              <Link to="/admin/delivery" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
+              <Link to="/admin/wholesale" class="admin-nav-link px-2" style={{textDecoration: 'none'}}>
                 <i class="material-icons icon">
-                  local_shipping
+                  description
                 </i>
-                <span class="text">Delivery</span>
+                <span class="text">Wholesale</span>
               </Link>
             </li>
             <li class="nav-item">
@@ -84,14 +92,6 @@ const AdminHeader = () => {
                   cast
                 </i>
                 <span class="text">Advertisement</span>
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link to="#" class="admin-nav-link px-2 " style={{textDecoration: 'none'}}>
-                <i class="material-icons icon expandView sideMenuToggler">
-                  view_list           
-                </i>
-                <span class="text">Resize</span>
               </Link>
             </li>
             <li class="nav-item">
@@ -117,7 +117,8 @@ const AdminHeader = () => {
                   <Route exact path="/admin/delivery" component={DeliveryPage}/>  
                   <Route exact path="/admin/discount" component={Discount}/>     
                   <Route exact path="/admin/sendemail" component={SendEmail}/>   
-                  <Route exact path="/admin/advertisement" component={AdvertisementPage} />    
+                  <Route exact path="/admin/advertisement" component={AdvertisementPage} /> 
+                  <Route exact path="/admin/wholesale" component={Wholesale}/>   
                 </Switch>
               </section>
             </Fragment>

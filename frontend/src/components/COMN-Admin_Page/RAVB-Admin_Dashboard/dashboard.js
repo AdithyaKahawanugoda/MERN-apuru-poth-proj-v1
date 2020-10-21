@@ -3,10 +3,38 @@ import LineChart from "../Charts/LineChart"
 import AdminFeedback from "./AdminFeedbacks"
 import axios from 'axios'
 import DisplayRequests from '../NITH-RequestBook-Admin/DisplayRequests'
+import NumberFormat from 'react-number-format';
 
 export default class Dashboard extends Component{
   constructor(props) {
     super();
+
+    this.state = {
+      totalQuantity: 0,
+      printCost: 0,
+      extra: 0,
+      userAccounts: 0
+    }
+  }
+
+  async componentDidMount() {
+    await axios.get('http://localhost:8059/inventory/product/all')
+    .then((res) => {
+      res.data.books.map((item) => {
+        this.setState({
+          totalQuantity: this.state.totalQuantity + item.quantity,
+          printCost: this.state.printCost + item.charges.printCost,
+          extra: this.state.extra + item.charges.other
+        })
+      })
+    }).catch((error) => {})
+    await axios.get('http://localhost:8059/user/getall')
+    .then((res) => {
+      this.setState({
+        userAccounts: this.state.userAccounts + res.data.users.length
+      })
+    })
+    .catch((err) => {})
   }
 
   render() {
@@ -14,12 +42,6 @@ export default class Dashboard extends Component{
       <div className="pt-2">
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 className="text-color mb-0">Dashboard</h1>
-          <a
-            href="#"
-            className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-          >
-            <i className="fas fa-download fa-sm text-white-50"></i> Generate Report
-          </a>
         </div>
   
         <div className="row">
@@ -29,10 +51,10 @@ export default class Dashboard extends Component{
                 <div className="row no-gutters align-items-center">
                   <div className="col mr-2">
                     <div className="text-xs font-weight-light text-primary text-uppercase mb-1">
-                      Earnings (Monthly)
+                      Stock Quantity
                     </div>
-                    <div className="h5 mb-0 text-primary font-weight-bold text-gray-800">
-                      $40,000
+                    <div className="h5 mb-0 text-primary font-weight-bold text-gray-800">                      
+                      <NumberFormat value={this.state.totalQuantity} displayType={'text'} thousandSeparator={true} />
                     </div>
                   </div>
                   <div className="col-auto">
@@ -49,10 +71,10 @@ export default class Dashboard extends Component{
                 <div className="row no-gutters align-items-center">
                   <div className="col mr-2">
                     <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                      Earnings (Annual)
+                      Total Print Cost
                     </div>
                     <div className="h5 mb-0 text-success font-weight-bold text-gray-800">
-                      $215,000
+                      LKR <NumberFormat value={this.state.printCost} displayType={'text'} thousandSeparator={true} />
                     </div>
                   </div>
                   <div className="col-auto">
@@ -64,35 +86,19 @@ export default class Dashboard extends Component{
           </div>
   
           <div className="col-xl-3 col-md-6 mb-4">
-            <div className="card border-left-info shadow-lg h-100 py-2">
+            <div className="card border-left-success shadow-lg h-100 py-2">
               <div className="card-body">
                 <div className="row no-gutters align-items-center">
                   <div className="col mr-2">
-                    <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
-                      Tasks
+                    <div className="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                      Extra Experiences
                     </div>
-                    <div className="row no-gutters align-items-center">
-                      <div className="col-auto">
-                        <div className="h5 mb-0 mr-3 text-info font-weight-bold text-gray-800">
-                          50%
-                        </div>
-                      </div>
-                      <div className="col">
-                        <div className="progress progress-sm mr-2">
-                          <div
-                            className="progress-bar bg-info"
-                            role="progressbar"
-                            style={{ width: 50 + "%" }}
-                            aria-valuenow="50"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                      </div>
+                    <div className="h5 mb-0 text-danger font-weight-bold text-gray-800">
+                      LKR <NumberFormat value={this.state.extra} displayType={'text'} thousandSeparator={true} />
                     </div>
                   </div>
                   <div className="col-auto">
-                    <i className="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    <i className="fas fa-dollar-sign fa-2x text-gray-300"></i>
                   </div>
                 </div>
               </div>
@@ -105,9 +111,11 @@ export default class Dashboard extends Component{
                 <div className="row no-gutters align-items-center">
                   <div className="col mr-2">
                     <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                      User Accounts
+                      Registerd User Accounts
                     </div>
-                    <div className="h5 mb-0 text-warning font-weight-bold text-gray-800">18</div>
+                    <div className="h5 mb-0 text-warning font-weight-bold text-gray-800">
+                      <NumberFormat value={this.state.userAccounts} displayType={'text'} thousandSeparator={true} />
+                    </div>
                   </div>
                   <div className="col-auto">
                     <i className="fas fa-comments fa-2x text-gray-300"></i>
@@ -125,35 +133,6 @@ export default class Dashboard extends Component{
                 <h6 className="m-0 font-weight-bold text-primary">
                   Earnings Overview
                 </h6>
-                <div className="dropdown no-arrow">
-                  <a
-                    className="dropdown-toggle"
-                    href="#"
-                    role="button"
-                    id="dropdownMenuLink"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                  </a>
-                  <div
-                    className="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink"
-                  >
-                    <div className="dropdown-header">Dropdown Header:</div>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
               </div>
               <div className="card-body">
                 <div className="chart-area">
@@ -167,35 +146,6 @@ export default class Dashboard extends Component{
             <div className="card shadow mb-4">
               <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 className="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                <div className="dropdown no-arrow">
-                  <a
-                    className="dropdown-toggle"
-                    href="#"
-                    role="button"
-                    id="dropdownMenuLink"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                  </a>
-                  <div
-                    className="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                    aria-labelledby="dropdownMenuLink"
-                  >
-                    <div className="dropdown-header">Dropdown Header:</div>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                    <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </div>
-                </div>
               </div>
   
               <div className="card-body">

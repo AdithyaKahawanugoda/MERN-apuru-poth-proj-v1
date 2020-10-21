@@ -27,6 +27,12 @@ const Profile = () => {
    const [show, setShow] = useState(false)
 
    useEffect(() => {
+    if (localStorage.getItem('role') !== 'user') {
+      window.location = '/admin'
+    }
+   })
+
+   useEffect(() => {
       setLoading(true)
       const getUserData = async () => {
          try {

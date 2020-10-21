@@ -12,6 +12,8 @@ const Feedbacks = (productId) => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [ratings, setRatings] = useState({});
   const [error, setError] = useState(null);
+  const [filterComments, setFilterComments] = useState([])
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     setLoading(true);
@@ -31,6 +33,12 @@ const Feedbacks = (productId) => {
     fetchFeedbacks();
   }, []);
 
+  useEffect(() => {
+    setFilterComments(
+      feedbacks.filter((feedback) => feedback.comment.toLowerCase().includes(search.toLowerCase()))
+    )
+  }, [search, feedbacks])
+
   if (loading) {
     return <div className="d-flex justify-content-center" style={{ paddingTop: 400 }}>
       <CircularProgress hidden={true} />
@@ -43,8 +51,16 @@ const Feedbacks = (productId) => {
         <CreateFeedback productId={productId} />
         <Ratings ratings={ratings} productId={productId} />
         <h3 className="pb-3 text-color">Customer Feedbacks</h3>
+        <label className="text-color">Search Customer Comments</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Search Customer Comments" aria-label="Recipient's username"  aria-describedby="basic-addon2" onChange={(e) => setSearch(e.target.value)}/>
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">Search</span>
+          </div>
+        </div>
+        <br/>
         <FadeIn>
-          {feedbacks.map((feedback, index) => (
+          {filterComments.map((feedback, index) => (
             <div key={feedback._id}>
               <Feedback
                 id={feedback._id}
