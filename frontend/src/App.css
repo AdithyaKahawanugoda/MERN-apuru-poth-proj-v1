@@ -23,6 +23,10 @@ body {
   background: url("https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Fadmin_login.jpg?alt=media&token=b134f834-bb47-4a03-b797-54b9cced0a79");
 }
 
+.logo {
+  background: url("https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Flogo.png?alt=media&token=bcb7d0f3-9eef-412c-9c2b-deaf530a34fd");
+}
+
 .App {
   text-align: center;
 }

@@ -9,7 +9,11 @@ export default class Header extends Component {
     return (
       <div>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">ApuruBook Publishers</a>
+      <a class="navbar-brand" href="#">
+        <img src="https://firebasestorage.googleapis.com/v0/b/apurubook-storeage.appspot.com/o/Static-Images%2Flogo.png?alt=media&token=bcb7d0f3-9eef-412c-9c2b-deaf530a34fd"  width="30" height="30" class="d-inline-block align-top" alt=""/> 
+        &nbsp;
+        ApuruBook Publishers
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

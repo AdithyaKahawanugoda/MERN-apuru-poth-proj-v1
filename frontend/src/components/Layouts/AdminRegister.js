@@ -90,7 +90,7 @@ export default class AdminRegister extends Component {
         <div className="card-body p-0">
           <div className="row">
             <div className="col-lg-5 d-none d-lg-block bg-admin-register"></div>
-            <div className="col-lg-7">
+            <div className="col-lg-7 col-sm-12">
               <div className="p-5">
                 <div className="text-center text-color">
                   <h1 className="h4 text-gray-900 mb-4">Create Admin Account!</h1>

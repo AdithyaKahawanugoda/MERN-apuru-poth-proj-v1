@@ -44,7 +44,7 @@ export default class AdminLogin extends Component {
     return (
       <div>
         <AdminHeader/>
-        <div className="container" style={{width: 950, marginTop: 120}}>
+        <div className="container" style={{width: "auto", marginTop: 120}}>
         <div className="card o-hidden border-0 shadow-lg my-5">
           <div className="card-body p-0">
             <div className="row">

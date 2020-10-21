@@ -41,7 +41,7 @@ export default class UserLogin extends Component {
 
   render() {
     return (
-      <div className="container" style={{width: 950, marginTop: 100}}>
+      <div className="container" style={{width: "auto", marginTop: 100}}>
       <div className="card o-hidden border-0 shadow-lg my-5">
         <div className="card-body p-0">
           <div className="row">
