@@ -16,6 +16,7 @@ export default class DiscountsList extends Component {
     this.refreshTable = this.refreshTable.bind(this);
     this.deleteDiscount = this.deleteDiscount.bind(this);
     this.updateDiscount = this.updateDiscount.bind(this);
+    this.generateReport = this.generateReport.bind(this);
 
     this.state = {
       discounts: [],
@@ -36,6 +37,19 @@ export default class DiscountsList extends Component {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  async generateReport() {
+    const obj = {
+      discounts: this.state.discounts
+    }
+    await axios.post('http://localhost:8059/discountreport/generatediscountlist', obj)
+    .then((res) => {
+      alert('Report generated')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   async refreshTable() {
@@ -139,7 +153,8 @@ export default class DiscountsList extends Component {
               </lable>
               &nbsp;&nbsp;&nbsp;
               <label>
-                <Button className="w-100" variant="contained" startIcon={<InsertDriveFileIcon />} disableElevation>
+                <Button className="w-100" variant="contained" startIcon={<InsertDriveFileIcon />} disableElevation
+                onClick={this.generateReport}>
                   generate discount report
                 </Button>
               </label>

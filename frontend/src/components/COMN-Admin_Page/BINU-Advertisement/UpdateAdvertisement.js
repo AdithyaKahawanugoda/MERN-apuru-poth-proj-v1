@@ -111,7 +111,7 @@ const UpdateAdvertisement = ({show, onHide, advertisementId}) => {
                 <div className="custom-file">
                   <input type="file" className="custom-file-input" id="inputGroupFile04"
                   required onChange={(e) => {setImage(e.target.files[0])}}/>
-                  <label className="custom-file-label" htmlFor="inputGroupFile04">Choose your profile picture</label>
+                  <label className="custom-file-label" htmlFor="inputGroupFile04">Choose Advertisement Image</label>
                 </div>
                 <div className="input-group-append">
                   <button className="btn btn-outline-primary" type="button" 

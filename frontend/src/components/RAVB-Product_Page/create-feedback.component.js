@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import StarRating from "stars-rating";
 import axios from 'axios'
 import Snackbar from '@material-ui/core/Snackbar'
+import ChatIcon from '@material-ui/icons/Chat';
 
 const CreateFeedback = (productId) => {
   const [rating, setRating] = useState(0);
@@ -77,9 +78,8 @@ const CreateFeedback = (productId) => {
           required
         />
         <div className="pt-3">
-          <button style={{ width: 120, borderRadius: 5 }} type="submit" className="btn btn-light">
-            Submit
-          </button>
+        <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
+        startIcon={<ChatIcon />} disableElevation type="submit">add my feedback</Button>
         </div>
       </form>
 

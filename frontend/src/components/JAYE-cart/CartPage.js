@@ -25,6 +25,12 @@ export default class CartPage extends Component {
   }
 
   async componentDidMount() {
+    if (localStorage.getItem("role") === "" || localStorage.getItem("role") !== "user") {
+      alert('Please Login To The System')
+      localStorage.removeItem('role')
+      localStorage.removeItem('Authorization')
+      window.location = "/"
+    }
     const config = {
       headers: {
         Authorization: localStorage.getItem("Authorization")

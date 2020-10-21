@@ -28,6 +28,8 @@ const Profile = () => {
 
    useEffect(() => {
     if (localStorage.getItem('role') !== 'user' || localStorage.getItem('role') === "") {
+      localStorage.removeItem('role')
+      localStorage.removeItem("Authorization")
       window.location = '/login'
     }
    })

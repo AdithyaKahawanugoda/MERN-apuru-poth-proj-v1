@@ -69,6 +69,7 @@ export default class CheckOutPage extends Component {
   }
 
   async submitCheckout(e) {
+    e.preventDefault()
     const config = {
       headers: {
         Authorization: localStorage.getItem("Authorization"),
@@ -82,6 +83,7 @@ export default class CheckOutPage extends Component {
     await axios.post('http://localhost:8059/order/create', data, config)
     .then((res) => {
       alert('success')
+      window.location="/me"
     })
     .catch((err) => {
       console.log(err)
@@ -149,7 +151,8 @@ export default class CheckOutPage extends Component {
                   </div>
                   <div class="form-group">
                     <label for="exampleFormControlTextarea1" className="text-color">Add additional details if you want to</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    onChange={(e) => {this.setState({description: e.target.value})}}></textarea>
                   </div>
                   <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
                   startIcon={<MenuBookIcon />} disableElevation type="submit">confirm checkout</Button>

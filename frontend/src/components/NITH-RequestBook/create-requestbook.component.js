@@ -2,31 +2,41 @@ import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar'
 
 export default class CreateRequestbook extends Component {
 
 //implementing constructor
 
 
-constructor(props) {
-  super(props);
-  //implementing binding
-  this.onChangeBookName = this.onChangeBookName.bind(this);
-  this.onChangeAuthorName = this.onChangeAuthorName.bind(this);
-  this.onChangePrintedYear = this.onChangePrintedYear.bind(this);
-  this.onChangeUserId = this.onChangeUserId.bind(this);
-  this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
-  this.onSubmit = this.onSubmit.bind(this);
+  constructor(props) {
+    super(props);
+    //implementing binding
+    this.onChangeBookName = this.onChangeBookName.bind(this);
+    this.onChangeAuthorName = this.onChangeAuthorName.bind(this);
+    this.onChangePrintedYear = this.onChangePrintedYear.bind(this);
+    this.onChangeUserId = this.onChangeUserId.bind(this);
+    this.onChangeUserEmail = this.onChangeUserEmail.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.handleClose = this.handleClose.bind(this)
 
-  this.state = {
-    bookname: "",
-    authorname: "",
-    printedyear: "",
-    userid: "",
-    useremail: "",
+    this.state = {
+      bookname: "",
+      authorname: "",
+      printedyear: "",
+      userid: "",
+      useremail: "",
+      open: false
 
+    }
   }
-}
+
+  handleClose(reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({open: false})
+  };
 
   onChangeBookName(e) {
     this.setState({
@@ -83,12 +93,21 @@ constructor(props) {
       console.log(err)
       //alert("Please Login to the Applicaion")
       //window.location = '/login'
+      this.setState({open: true})
     })
   }
 
   render() {
     return (
       <div className="container pt-5">
+      <Snackbar open={this.state.open} autoHideDuration={3000} onClose={this.handleClose} anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}>
+        <div className="alert alert-danger">
+            Plase login to the Application
+        </div>
+      </Snackbar>
         <div className="card o-hidden border-0 shadow-lg my-5">
           <div className="card-body p-0">
             <div className="row">

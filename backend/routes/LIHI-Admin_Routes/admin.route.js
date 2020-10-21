@@ -32,6 +32,25 @@ router.post('/create', async (req, res) => {
   }
 })
 
+router.put('/update', adminAuth, async (req, res) => {
+  try {
+    const {name, email, phoneNumber, profileImage} = req.body
+
+    let admin = await Admin.findOne({ email})
+    if (!admin) {
+      throw new Error('There is no Admin account')
+    }
+
+    const adminUpdate = await Admin.findByIdAndUpdate(req.admin.id, 
+      {name: name, email: email, phoneNumber: phoneNumber, profileImage: profileImage})
+
+    res.status(200).send({status: 'Admin Profile Updated', admin: adminUpdate})
+  } catch (error) {
+    res.status(500).send({error: error.message})
+    console.log(error)
+  }
+})
+
 router.get('/adminprofile', adminAuth, async (req, res) => {
   try {
     res.status(200).send({admin: req.admin})

@@ -1,20 +1,22 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
-import SignUp from '../Layouts/UserRegister'
 import LockOpenOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import Button from "@material-ui/core/Button";
+import Snackbar from '@material-ui/core/Snackbar'
 
 export default class UserLogin extends Component {
   constructor(props) {
     super(props);
     this.userLoginSubmit = this.userLoginSubmit.bind(this)
+    this.handleClose = this.handleClose.bind(this)
 
     this.state = {
       email: "",
       password: "",
       token: "",
-      role: ""
+      role: "",
+      open: false
     }
   }
 
@@ -36,12 +38,28 @@ export default class UserLogin extends Component {
     })
     .catch((err) => {
       console.log(err)
+      this.setState({open: true})
     })
   }
+
+  handleClose(reason) {
+    if (reason === 'clickaway') {
+       return;
+    }
+    this.setState({open: false})
+ };
 
   render() {
     return (
       <div className="container" style={{width: "auto", marginTop: 100}}>
+      <Snackbar open={this.state.open} autoHideDuration={3000} onClose={this.handleClose} anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}>
+        <div className="alert alert-danger">
+            Email Or Password is Wronge
+        </div>
+      </Snackbar>
       <div className="card o-hidden border-0 shadow-lg my-5">
         <div className="card-body p-0">
           <div className="row">

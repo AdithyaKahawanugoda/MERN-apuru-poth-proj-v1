@@ -41,7 +41,7 @@ const UpdateExperience = ({id,title, description, company, from, to, show, onHid
         <Modal show={show} onHide={onHide} animation={true} size="lg"
         aria-labelledby="contained-modal-title-vcenter" centered>
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter" className="text-color">Update Delivery Details</Modal.Title>
+            <Modal.Title id="contained-modal-title-vcenter" className="text-color">Update Experience</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={sendUpdateExperice} className="text-color">  

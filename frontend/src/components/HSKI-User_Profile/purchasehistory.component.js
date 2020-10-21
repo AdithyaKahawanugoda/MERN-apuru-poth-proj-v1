@@ -72,13 +72,13 @@ const Purchasehistory = () => {
         get purchase history
       </Button>
       
-        <div class="input-group mb-3">
-        <div><label className="text-color">Search Monthly Delivered Orders</label></div>
-          <input type="text" class="form-control" placeholder="Search a month" aria-label="Recipient's username"  aria-describedby="basic-addon2" onChange={(e) => setSearch(e.target.value)}/>
+        <div class="input-group mb-0">
+          <input type="text" class="form-control" placeholder="2000-00-00" aria-label="Recipient's username"  aria-describedby="basic-addon2" onChange={(e) => setSearch(e.target.value)}/>
           <div class="input-group-append">
-            <span class="input-group-text" id="basic-addon2">Search</span>
+            <span class="input-group-text" id="basic-addon2">Search By Delivery Date</span>
           </div>
         </div>
+        <br/>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead style={{backgroundColor: "#4f535a"}}>

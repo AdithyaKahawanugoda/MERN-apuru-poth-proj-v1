@@ -5,6 +5,7 @@ import firebase from '../../../firebase'
 import Progress from '../../Layouts/Progress'
 import DisplayExperience from './DisplayExperience'
 import Button from '@material-ui/core/Button'
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 export default class AdminProfile extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ export default class AdminProfile extends Component {
     this.uploadImage = this.uploadImage.bind(this);
     this.onChangeImage = this.onChangeImage.bind(this);
     this.sendNewExperience = this.sendNewExperience.bind(this);
+    this.submitAdminUpdate = this.submitAdminUpdate.bind(this);
+
     this.state ={ 
       name: "",
       email: "",
@@ -75,7 +78,32 @@ export default class AdminProfile extends Component {
     this.setState({image: e.target.files[0]})
   }
 
-  async sendNewExperience(e) {
+  async submitAdminUpdate(e) {
+    e.preventDefault()
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("Authorization")
+      }
+    }
+
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      phoneNumber: this.state.phoneNumber,
+      profileImage: this.state.profileImage
+    }
+
+    await axios.put('http://localhost:8059/adminprofile/update', data, config)
+    .then((res) => {
+      alert(res.data.status)
+      window.location = "/admin/profile"
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  async sendNewExperience(e) { 
     e.preventDefault()
     const config = {
       headers: {
@@ -92,6 +120,7 @@ export default class AdminProfile extends Component {
     await axios.post('http://localhost:8059/adminprofile/addexp', addNew, config)
     .then((res) => {
       alert('Experience Added')
+      window.location = "/admin/profile"
     })
     .catch((err) => {
       console.log(err)
@@ -116,40 +145,42 @@ export default class AdminProfile extends Component {
                       <Image src={this.state.profileImage} roundedCircle style={{ width: 220 }} />
                     </div>
                     <div className="col-lg-8 col-sm-12">
-                      <div className="form-group">
-                        <input type="text" className="form-control form-control-user" value={this.state.name}
-                        onChange={e => this.setState({name: e.target.value})}/>
-                        <small className="text-muted"><i>make changes to name</i></small>
-                      </div>
-                      <div className="form-group">
-                        <input type="email" className="form-control form-control-user" value={this.state.email}
-                        onChange={e => this.setState({ email: e.target.value})} required/>
-                        <small className="text-muted"><i>make changes to email</i></small>
-                      </div>
-                      <div className="form-group">
-                        <input type="text" className="form-control form-control-user" value={this.state.phoneNumber}
-                        onChange={e => this.setState({ phoneNumber: e.target.value})}/>
-                        <small className="text-muted"><i>make changes to phone number</i></small>
-                      </div>
-                      <div className="form-group">
-                        <div className="input-group">
-                          <div className="custom-file">
-                            <input type="file" className="custom-file-input" id="inputGroupFile04"
-                            onChange={this.onChangeImage} />     
-                            <label className="custom-file-label" htmlFor="inputGroupFile04">Choose your profile picture</label>
-                          </div>
-                          <div className="input-group-append">
-                            <button className="btn btn-outline-primary" type="button" 
-                            onClick={this.uploadImage}>Upload</button>
-                          </div>
+                      <form onSubmit={this.submitAdminUpdate}>
+                        <div className="form-group">
+                          <input type="text" className="form-control form-control-user" value={this.state.name}
+                          onChange={e => this.setState({name: e.target.value})}/>
+                          <small className="text-muted"><i>make changes to name</i></small>
                         </div>
-                        <small className="text-muted"><i>click on the upload button first</i></small>
-                      </div>
-                      <Progress percentage={this.state.uploadPercentage}/>
-                      <br/>
-                      <Button className="w-100" variant="contained" disableElevation type="submit">
-                        update account
-                      </Button> 
+                        <div className="form-group">
+                          <input type="email" className="form-control form-control-user" value={this.state.email}
+                          onChange={e => this.setState({ email: e.target.value})} required/>
+                          <small className="text-muted"><i>make changes to email</i></small>
+                        </div>
+                        <div className="form-group">
+                          <input type="text" className="form-control form-control-user" value={this.state.phoneNumber}
+                          onChange={e => this.setState({ phoneNumber: e.target.value})}/>
+                          <small className="text-muted"><i>make changes to phone number</i></small>
+                        </div>
+                        <div className="form-group">
+                          <div className="input-group">
+                            <div className="custom-file">
+                              <input type="file" className="custom-file-input" id="inputGroupFile04"
+                              onChange={this.onChangeImage} />     
+                              <label className="custom-file-label" htmlFor="inputGroupFile04">Choose your profile picture</label>
+                            </div>
+                            <div className="input-group-append">
+                              <button className="btn btn-outline-primary" type="button" 
+                              onClick={this.uploadImage}>Upload</button>
+                            </div>
+                          </div>
+                          <small className="text-muted"><i>click on the upload button first</i></small>
+                        </div>
+                        <Progress percentage={this.state.uploadPercentage}/>
+                        <br/>
+                        <Button className="w-100" variant="contained" disableElevation type="submit" style={{background: "#ff8c00", width: 100+"%"}}>
+                          update account
+                        </Button> 
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -194,9 +225,8 @@ export default class AdminProfile extends Component {
                             <small className="text-muted"><i>tell us when you <b>stop</b> work on their</i></small>
                           </div>
                         </div>
-                        <Button className="w-100" color="primary" type="submit" variant="contained" disableElevation>
-                          ADD THIS EXPERIENCE TO LIST
-                        </Button>
+                        <Button variant="contained" className="w-10" style={{background: "#ff8c00", width: 100+"%"}}
+                        startIcon={<PersonAddIcon />} disableElevation type="submit">ADD THIS EXPERIENCE TO LIST</Button>
                       </form>  
                     </div>
                   </div>
