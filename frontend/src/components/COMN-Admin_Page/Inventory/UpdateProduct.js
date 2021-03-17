@@ -116,6 +116,7 @@ const UpdateProduct = ({ show, onHide, productID }) => {
       .then(() => {
         alert("PDF created!");
       })
+
       .catch((err) => {
         alert(err);
       });

@@ -98,7 +98,7 @@ module.exports = (data) => {
                    </td>
                 </tr>
                 <tr class="information">
-                   <td colspan="2">
+                   <td colspan="3">
                       <table>
                          <tr>
                             <td>
@@ -106,8 +106,8 @@ module.exports = (data) => {
                                  data.publishingTitle
                                }</h2>
                             </td>
-                            <td>
-                               <h2>ISBN: ${data.ISBN}</h2>
+                            <td >
+                               <h3>ISBN: ${data.ISBN}</h3>
                             </td>
                          </tr>
                       </table>

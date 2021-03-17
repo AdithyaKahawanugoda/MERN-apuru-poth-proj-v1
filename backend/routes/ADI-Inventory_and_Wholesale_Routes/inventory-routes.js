@@ -303,7 +303,7 @@ router.delete("/product/delete/:id", async (req, res, next) => {
 router.post("/report", (req, res, next) => {
   pdf
     .create(pdfTemplate(req.body), {})
-    .toFile(`${__dirname}/documents/ProductReport.pdf`, (err) => {
+    .toFile(`C:/Users/adith/Desktop/ProductReport.pdf`, (err) => {
       if (err) {
         res.send(Promise.reject());
       }
@@ -311,9 +311,9 @@ router.post("/report", (req, res, next) => {
     });
 });
 
-//GET req to preview report
-router.get("/fetch-pdf", (req, res) => {
-  res.sendFile(`${__dirname}/result.pdf`);
-});
+// //GET req to preview report
+// router.get("/fetch-pdf", (req, res) => {
+//   res.sendFile(`${__dirname}/result.pdf`);
+// });
 
 module.exports = router;
